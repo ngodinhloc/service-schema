@@ -3,6 +3,7 @@
 namespace EventSchema\Tests\Event;
 
 use EventSchema\Event\Event;
+use EventSchema\Event\EventRegister;
 use EventSchema\Service\ServiceFactory;
 use EventSchema\Service\ServiceInterface;
 use EventSchema\Service\ServiceRegister;
@@ -22,31 +23,32 @@ class TestEventValidator extends TestCase
 
     public function testEventValidator()
     {
+        // put message to SQS
         $event = new Event("Users.afterSaveCommit.Create", ["user" => (object)["data" => ["name" => "Ken"]], "account" => (object)["data" => ["name" => "Brighte"]]]);
         $message = $event->toJson();
+
+        // receive message from SQS
         $message = json_decode($message);
-//        var_dump($message);
 
+        // load config
+        $eventRegister = new EventRegister([$this->testDir . "\json\configs\\events.json"]);
         $serviceRegister = new ServiceRegister([$this->testDir . "\json\configs\services.json"]);
-        $serviceFactory = new ServiceFactory($serviceRegister);;
+        $serviceFactory = new ServiceFactory($eventRegister, $serviceRegister);;
 
+        $validator = new Validator();
         $services = $serviceFactory->createServices($event);
+        /** @var ServiceInterface $service */
         foreach ($services as $service) {
+            $schemaJson = $this->testDir . "\json\schemas\\" . $service->getSchema();
+            $schema = json_decode(file_get_contents($schemaJson));
+            $validator->validate($message, $schema, Constraint::CHECK_MODE_APPLY_DEFAULTS);
+            $this->assertTrue($validator->isValid());
+
             /** @var ServiceInterface $service */
             $service->run($event);
         }
-        die("");
 
-//        $json = $this->testDir . "\json\messages\Users.afterSaveCommit.Create.json";
-//        $message = json_decode(file_get_contents($json));
-//        var_dump($message);
 
-        $schemaJson = $this->testDir . "\json\schemas\CreateContact.json";
-        $schema = json_decode(file_get_contents($schemaJson));
-        $validator = new Validator();
-        $validator->validate($message, $schema, Constraint::CHECK_MODE_APPLY_DEFAULTS);
-
-        var_dump($validator->isValid());
 //        var_dump($message->payload);
         foreach ($message as $key => $value) {
 //           var_dump($key);

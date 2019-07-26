@@ -3,9 +3,13 @@
 namespace EventSchema\Service;
 
 use EventSchema\Event\Event;
+use EventSchema\Event\EventRegister;
 
 class ServiceFactory
 {
+    /** @var \EventSchema\Event\EventRegister */
+    protected $eventRegister;
+
     /** @var \EventSchema\Service\ServiceRegister */
     protected $serviceRegister;
 
@@ -14,17 +18,27 @@ class ServiceFactory
      *
      * @param \EventSchema\Service\ServiceRegister|null $serviceRegister
      */
-    public function __construct(ServiceRegister $serviceRegister = null)
+    public function __construct(EventRegister $eventRegister = null, ServiceRegister $serviceRegister = null)
     {
+        $this->eventRegister = $eventRegister;
         $this->serviceRegister = $serviceRegister;
     }
 
+    /**
+     * @param \EventSchema\Event\Event|null $event
+     * @return array
+     */
     public function createServices(Event $event = null)
     {
-        $servicesList = $this->serviceRegister->retrieve($event->name);
+        $servicesList = $this->eventRegister->retrieveEvent($event->name);
         $services = [];
         foreach ($servicesList as $class) {
-            $services[] = new $class();
+            $service = new $class();
+            if ($service instanceof ServiceInterface) {
+                $schema = $this->serviceRegister->retrieveService($class);
+                $service->setSchema($schema);
+                $services[] = $service;
+            }
         }
 
         return $services;

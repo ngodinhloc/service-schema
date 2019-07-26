@@ -29,9 +29,9 @@ class ServiceRegister
         foreach ($this->configs as $config) {
             $rows = json_decode(file_get_contents($config), true);
             foreach ($rows as $row) {
-                $eventName = $row["event"];
-                $services = $row["services"];
-                $this->register($eventName, $services);
+                $service = $row["service"];
+                $schema = $row["schema"];
+                $this->registerService($service, $schema);
             }
         }
 
@@ -39,66 +39,29 @@ class ServiceRegister
     }
 
     /**
-     * @param string|null $eventName
-     * @return mixed|null
+     * @param string|null $serviceName
+     * @param string|null $schema
+     * @return \EventSchema\Service\ServiceRegister
      */
-    public function retrieve(string $eventName = null)
+    public function registerService(string $serviceName = null, string $schema = null)
     {
-        if (isset($this->services[$eventName])) {
-            return $this->services[$eventName];
+        if (!isset($this->services[$serviceName])) {
+            $this->services[$serviceName] = $schema;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string|null $serviceName
+     * @return array|null
+     */
+    public function retrieveService(string $serviceName = null)
+    {
+        if (isset($this->services[$serviceName])) {
+            return $this->services[$serviceName];
         }
 
         return null;
-    }
-
-    /**
-     * @param string|null $eventName
-     * @param array|null $services
-     */
-    public function register(string $eventName = null, array $services = null)
-    {
-        if (!isset($this->services[$eventName])) {
-            $this->services[$eventName] = $services;
-        } else {
-            $this->services[$eventName] = array_unique(array_merge($this->services[$eventName], $services));
-        }
-    }
-
-    /**
-     * @return array
-     */
-    public function getConfigs(): array
-    {
-        return $this->configs;
-    }
-
-    /**
-     * @param array $configs
-     * @return \EventSchema\Service\ServiceRegister
-     */
-    public function setConfigs(array $configs = null)
-    {
-        $this->configs = $configs;
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getServices()
-    {
-        return $this->services;
-    }
-
-    /**
-     * @param array $services
-     * @return \EventSchema\Service\ServiceRegister
-     */
-    public function setServices(array $services = null)
-    {
-        $this->services = $services;
-
-        return $this;
     }
 }

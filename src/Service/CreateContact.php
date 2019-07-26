@@ -4,9 +4,9 @@ namespace EventSchema\Service;
 
 use EventSchema\Event\EventInterface;
 
-class CreateContact implements ServiceInterface
+class CreateContact extends Service implements ServiceInterface
 {
-    public function run(EventInterface $event): bool
+    public function run(EventInterface $event = null)
     {
         echo "CreateContact";
 

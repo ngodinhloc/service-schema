@@ -1,15 +1,14 @@
 [
   {
-    "event": "Users.afterSaveCommit.Create",
-    "services": [
-      "EventSchema\\Service\\CreateContact",
-      "EventSchema\\Service\\CreateTask"
-    ]
+    "service": "EventSchema\\Service\\CreateContact",
+    "schema": "CreateContact.json"
   },
   {
-    "event": "Users.afterSaveCommit.Update",
-    "services": [
-      "EventSchema\\Service\\UpdateContact"
-    ]
+    "service": "EventSchema\\Service\\UpdateContact",
+    "schema": "UpdateContact.json"
+  },
+  {
+    "service": "EventSchema\\Service\\CreateTask",
+    "schema": "CreateTask.json"
   }
 ]

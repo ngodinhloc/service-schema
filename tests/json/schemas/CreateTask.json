@@ -24,10 +24,7 @@
               "type": "string",
               "default": "\\App\\Entity\\User"
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         },
         "account": {
           "type": "object",
@@ -39,10 +36,7 @@
               "type": "string",
               "default": "\\App\\Entity\\Account"
             }
-          },
-          "required": [
-            "data"
-          ]
+          }
         }
       },
       "required": [

@@ -6,11 +6,11 @@ namespace EventSchema\Service;
 
 use EventSchema\Event\EventInterface;
 
-class CreateTask implements ServiceInterface
+class CreateTask extends Service implements ServiceInterface
 {
-    public function run(EventInterface $event): bool
+    public function run(EventInterface $event = null)
     {
-        echo "CreateTask\n";
+        echo "CreateTask";
 
         return true;
     }
