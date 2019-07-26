@@ -1,0 +1,16 @@
+{
+  "name": "Users.afterSaveCommit.Create",
+  "time": "20190726032212",
+  "payload": {
+    "user": {
+      "data": {
+        "name": "Ken"
+      }
+    },
+    "account": {
+      "data": {
+        "name": "Brighte"
+      }
+    }
+  }
+}
