@@ -2,6 +2,8 @@
 
 namespace ServiceSchema\Event;
 
+use ServiceSchema\Json\JsonReader;
+
 class Event implements EventInterface
 {
     /** @var string */
@@ -17,10 +19,10 @@ class Event implements EventInterface
      * Event constructor.
      *
      * @param string|null $name
-     * @param array|null $payload
+     * @param array|null|\stdClass $payload
      * @param string|null $time
      */
-    public function __construct(string $name = null, string $time = null, array $payload = null)
+    public function __construct(string $name = null, string $time = null, $payload = null)
     {
         $this->name = $name;
         $this->time = $time ?? date("YmdHis");
@@ -29,9 +31,68 @@ class Event implements EventInterface
 
     /**
      * @return false|string
+     * @throws \ServiceSchema\Json\Exception\JsonException
      */
     public function toJson()
     {
-        return json_encode($this);
+        return JsonReader::encode($this);
     }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return \ServiceSchema\Event\Event
+     */
+    public function setName(string $name = null)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTime()
+    {
+        return $this->time;
+    }
+
+    /**
+     * @param string $time
+     * @return \ServiceSchema\Event\Event
+     */
+    public function setTime(string $time = null)
+    {
+        $this->time = $time;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPayload()
+    {
+        return $this->payload;
+    }
+
+    /**
+     * @param array|\stdClass $payload
+     * @return \ServiceSchema\Event\Event
+     */
+    public function setPayload($payload = null)
+    {
+        $this->payload = $payload;
+
+        return $this;
+    }
+
 }

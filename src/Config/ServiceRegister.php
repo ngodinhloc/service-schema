@@ -1,6 +1,8 @@
 <?php
 
-namespace ServiceSchema\Service;
+namespace ServiceSchema\Config;
+
+use ServiceSchema\Json\JsonReader;
 
 class ServiceRegister
 {
@@ -14,6 +16,7 @@ class ServiceRegister
      * ServiceRegister constructor.
      *
      * @param array|null $configs
+     * @throws \ServiceSchema\Json\Exception\JsonException
      */
     public function __construct(array $configs = null)
     {
@@ -22,12 +25,13 @@ class ServiceRegister
     }
 
     /**
-     * @return \ServiceSchema\Service\ServiceRegister
+     * @return \ServiceSchema\Config\ServiceRegister
+     * @throws \ServiceSchema\Json\Exception\JsonException
      */
     protected function loadServices()
     {
         foreach ($this->configs as $config) {
-            $rows = json_decode(file_get_contents($config), true);
+            $rows = JsonReader::decode(JsonReader::read($config), true);
             foreach ($rows as $row) {
                 $service = $row["service"];
                 $schema = $row["schema"];
@@ -41,7 +45,7 @@ class ServiceRegister
     /**
      * @param string|null $serviceName
      * @param string|null $schema
-     * @return \ServiceSchema\Service\ServiceRegister
+     * @return \ServiceSchema\Config\ServiceRegister
      */
     public function registerService(string $serviceName = null, string $schema = null)
     {

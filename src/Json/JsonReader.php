@@ -28,16 +28,17 @@ class JsonReader implements JsonReaderInterface
 
     /**
      * @param string|null $json
+     * @param bool $assoc
      * @return array|mixed
      * @throws \ServiceSchema\Json\Exception\JsonException
      */
-    public static function decode(string $json = null)
+    public static function decode(string $json = null, bool $assoc = false)
     {
         if (empty($json)) {
             throw new JsonException(JsonException::MISSING_JSON_CONTENT);
         }
 
-        return json_decode($json);
+        return json_decode($json, $assoc);
     }
 
     /**

@@ -14,7 +14,14 @@ interface JsonReaderInterface
 
     /**
      * @param string|null $json
+     * @param bool $assoc
      * @return array|mixed
      */
-    public static function decode(string $json = null);
+    public static function decode(string $json = null, bool $assoc = false);
+
+    /**
+     * @param null $content
+     * @return false|string
+     */
+    public static function encode($content = null);
 }

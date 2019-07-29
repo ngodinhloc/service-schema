@@ -1,7 +1,9 @@
 <?php
 
-namespace ServiceSchema\Event;
+namespace ServiceSchema\Config;
 
+
+use ServiceSchema\Json\JsonReader;
 
 class EventRegister
 {
@@ -11,6 +13,12 @@ class EventRegister
     /** @var array $events */
     protected $events = [];
 
+    /**
+     * EventRegister constructor.
+     *
+     * @param array|null $configs
+     * @throws \ServiceSchema\Json\Exception\JsonException
+     */
     public function __construct(array $configs = null)
     {
         $this->configs = $configs;
@@ -18,12 +26,13 @@ class EventRegister
     }
 
     /**
-     * @return \ServiceSchema\Event\EventRegister
+     * @return \ServiceSchema\Config\EventRegister
+     * @throws \ServiceSchema\Json\Exception\JsonException
      */
     protected function loadEvents()
     {
         foreach ($this->configs as $config) {
-            $rows = json_decode(file_get_contents($config), true);
+            $rows = JsonReader::decode(JsonReader::read($config), true);
             foreach ($rows as $row) {
                 $eventName = $row["event"];
                 $services = $row["services"];
@@ -37,7 +46,7 @@ class EventRegister
     /**
      * @param string|null $eventName
      * @param array|null $services
-     * @return \ServiceSchema\Event\EventRegister
+     * @return \ServiceSchema\Config\EventRegister
      */
     public function registerEvent(string $eventName = null, array $services = null)
     {
