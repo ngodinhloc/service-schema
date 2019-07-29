@@ -13,6 +13,9 @@ class ProcessorTest extends TestCase
     /** @var Processor */
     protected $processor;
 
+    /**
+     * @throws \ServiceSchema\Json\Exception\JsonException
+     */
     public function setUp()
     {
         parent::setUp();
