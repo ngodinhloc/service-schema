@@ -7,6 +7,8 @@ namespace ServiceSchema\Service;
 class Service
 {
     /** @var string */
+    protected $name;
+    /** @var string */
     protected $jsonSchema;
 
     /**
@@ -27,4 +29,24 @@ class Service
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return Service
+     */
+    public function setName(string $name = null)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
 }

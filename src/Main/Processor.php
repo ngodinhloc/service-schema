@@ -64,23 +64,19 @@ class Processor
 
         foreach ($registeredEvents as $eventName => $services) {
             if (empty($services)) {
-                return false;
+                continue;
             }
 
             foreach ($services as $serviceName) {
-                var_dump($serviceName);
                 $registerService = $this->serviceRegister->retrieveService($serviceName);
-                var_dump($this->serviceRegister->getServices());
-                var_dump($registerService);
                 if (empty($registerService)) {
-                    return false;
+                    continue;
                 }
 
-                var_dump($serviceName);
                 $jsonSchema = $registerService[$serviceName];
                 $service = $this->serviceFactory->createService($serviceName, $jsonSchema);
 
-                return $this->runService($event, $service);
+                $this->runService($event, $service);
             }
         }
     }
@@ -97,7 +93,7 @@ class Processor
     /**
      * @param \ServiceSchema\Event\EventInterface|null $event
      * @param \ServiceSchema\Service\ServiceInterface|null $service
-     * @return \ServiceSchema\Event\EventInterface|bool
+     * @return bool
      * @throws \ServiceSchema\Json\Exception\JsonException
      * @throws \ServiceSchema\Service\Exception\ServiceException
      */

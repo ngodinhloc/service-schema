@@ -22,4 +22,15 @@ interface ServiceInterface
      * @return string
      */
     public function getJsonSchema();
+
+    /**
+     * @param string $name
+     * @return bool
+     */
+    public function setName(string $name = null);
+
+    /**
+     * @return string
+     */
+    public function getName();
 }
