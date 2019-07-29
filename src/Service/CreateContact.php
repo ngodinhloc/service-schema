@@ -1,8 +1,8 @@
 <?php
 
-namespace EventSchema\Service;
+namespace ServiceSchema\Service;
 
-use EventSchema\Event\EventInterface;
+use ServiceSchema\Event\EventInterface;
 
 class CreateContact extends Service implements ServiceInterface
 {

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace EventSchema\Service;
+namespace ServiceSchema\Service;
 
 
 class Service
@@ -27,5 +27,4 @@ class Service
 
         return $this;
     }
-
 }

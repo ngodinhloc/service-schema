@@ -1,14 +1,14 @@
 <?php
 
-namespace EventSchema\Service;
+namespace ServiceSchema\Service;
 
-use EventSchema\Event\EventInterface;
+use ServiceSchema\Event\EventInterface;
 
 interface ServiceInterface
 {
     /**
-     * @param \EventSchema\Event\EventInterface $event
-     * @return bool
+     * @param \ServiceSchema\Event\EventInterface $event
+     * @return bool|\ServiceSchema\Event\EventInterface
      */
     public function run(EventInterface $event = null);
 

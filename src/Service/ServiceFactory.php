@@ -1,22 +1,22 @@
 <?php
 
-namespace EventSchema\Service;
+namespace ServiceSchema\Service;
 
-use EventSchema\Event\Event;
-use EventSchema\Event\EventRegister;
+use ServiceSchema\Event\Event;
+use ServiceSchema\Event\EventRegister;
 
 class ServiceFactory
 {
-    /** @var \EventSchema\Event\EventRegister */
+    /** @var \ServiceSchema\Event\EventRegister */
     protected $eventRegister;
 
-    /** @var \EventSchema\Service\ServiceRegister */
+    /** @var \ServiceSchema\Service\ServiceRegister */
     protected $serviceRegister;
 
     /**
      * ServiceFactory constructor.
      *
-     * @param \EventSchema\Service\ServiceRegister|null $serviceRegister
+     * @param \ServiceSchema\Service\ServiceRegister|null $serviceRegister
      */
     public function __construct(EventRegister $eventRegister = null, ServiceRegister $serviceRegister = null)
     {
@@ -25,7 +25,7 @@ class ServiceFactory
     }
 
     /**
-     * @param \EventSchema\Event\Event|null $event
+     * @param \ServiceSchema\Event\Event|null $event
      * @return array
      */
     public function createServices(Event $event = null)

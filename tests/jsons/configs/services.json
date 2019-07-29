@@ -1,0 +1,14 @@
+[
+  {
+    "service": "ServiceSchema\\Service\\CreateContact",
+    "schema": "CreateContact.json"
+  },
+  {
+    "service": "ServiceSchema\\Service\\UpdateContact",
+    "schema": "UpdateContact.json"
+  },
+  {
+    "service": "ServiceSchema\\Service\\CreateTask",
+    "schema": "CreateTask.json"
+  }
+]

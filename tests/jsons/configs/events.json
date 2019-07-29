@@ -1,0 +1,15 @@
+[
+  {
+    "event": "Users.afterSaveCommit.Create",
+    "services": [
+      "ServiceSchema\\Service\\CreateContact",
+      "ServiceSchema\\Service\\CreateTask"
+    ]
+  },
+  {
+    "event": "Users.afterSaveCommit.Update",
+    "services": [
+      "ServiceSchema\\Service\\UpdateContact"
+    ]
+  }
+]

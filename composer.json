@@ -24,12 +24,12 @@
   },
   "autoload": {
     "psr-4": {
-      "EventSchema\\": "src/"
+      "ServiceSchema\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "EventSchema\\": "tests/"
+      "ServiceSchema\\Tests\\": "tests/"
     }
   },
   "minimum-stability": "dev"

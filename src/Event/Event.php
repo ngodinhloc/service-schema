@@ -1,6 +1,6 @@
 <?php
 
-namespace EventSchema\Event;
+namespace ServiceSchema\Event;
 
 class Event implements EventInterface
 {
@@ -13,35 +13,18 @@ class Event implements EventInterface
     /** @var array */
     public $payload;
 
-    /** @var string json file */
-    protected $schema;
-
-    public function __construct(string $name = null, array $payload = null, string $time = null, string $schema = null)
+    /**
+     * Event constructor.
+     *
+     * @param string|null $name
+     * @param array|null $payload
+     * @param string|null $time
+     */
+    public function __construct(string $name = null, string $time = null, array $payload = null)
     {
         $this->name = $name;
-
-        $this->payload = $payload;
         $this->time = $time ?? date("YmdHis");
-        $this->schema = $schema;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSchema()
-    {
-        return $this->schema;
-    }
-
-    /**
-     * @param string $schema
-     * @return \EventSchema\Event\Event
-     */
-    public function setSchema(string $schema = null)
-    {
-        $this->schema = $schema;
-
-        return $this;
+        $this->payload = $payload;
     }
 
     /**

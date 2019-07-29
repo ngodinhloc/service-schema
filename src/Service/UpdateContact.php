@@ -1,12 +1,12 @@
 <?php
 
 
-namespace EventSchema\Tests\Service;
+namespace ServiceSchema\Tests\Service;
 
 
-use EventSchema\Event\EventInterface;
-use EventSchema\Service\Service;
-use EventSchema\Service\ServiceInterface;
+use ServiceSchema\Event\EventInterface;
+use ServiceSchema\Service\Service;
+use ServiceSchema\Service\ServiceInterface;
 
 class UpdateContact extends Service implements ServiceInterface
 {

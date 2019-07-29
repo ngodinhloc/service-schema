@@ -1,6 +1,6 @@
 <?php
 
-namespace EventSchema\Service;
+namespace ServiceSchema\Service;
 
 class ServiceRegister
 {
@@ -22,7 +22,7 @@ class ServiceRegister
     }
 
     /**
-     * @return \EventSchema\Service\ServiceRegister
+     * @return \ServiceSchema\Service\ServiceRegister
      */
     protected function loadServices()
     {
@@ -41,7 +41,7 @@ class ServiceRegister
     /**
      * @param string|null $serviceName
      * @param string|null $schema
-     * @return \EventSchema\Service\ServiceRegister
+     * @return \ServiceSchema\Service\ServiceRegister
      */
     public function registerService(string $serviceName = null, string $schema = null)
     {

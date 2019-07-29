@@ -1,8 +1,8 @@
 <?php
 
-namespace EventSchema\Schema;
+namespace ServiceSchema\Schema;
 
-use EventSchema\Event\Event;
+use ServiceSchema\Event\Event;
 
 class Parser
 {

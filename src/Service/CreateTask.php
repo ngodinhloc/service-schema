@@ -1,10 +1,10 @@
 <?php
 
 
-namespace EventSchema\Service;
+namespace ServiceSchema\Service;
 
 
-use EventSchema\Event\EventInterface;
+use ServiceSchema\Event\EventInterface;
 
 class CreateTask extends Service implements ServiceInterface
 {

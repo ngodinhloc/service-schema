@@ -1,17 +1,17 @@
 <?php
 
-namespace EventSchema\Tests\Event;
+namespace ServiceSchema\Tests\Event;
 
-use EventSchema\Event\Event;
-use EventSchema\Event\EventRegister;
-use EventSchema\Service\ServiceFactory;
-use EventSchema\Service\ServiceInterface;
-use EventSchema\Service\ServiceRegister;
+use ServiceSchema\Event\Event;
+use ServiceSchema\Event\EventRegister;
+use ServiceSchema\Service\ServiceFactory;
+use ServiceSchema\Service\ServiceInterface;
+use ServiceSchema\Service\ServiceRegister;
 use JsonSchema\Constraints\Constraint;
 use JsonSchema\Validator;
 use PHPUnit\Framework\TestCase;
 
-class TestEventValidator extends TestCase
+class EventValidatorTest extends TestCase
 {
     protected $testDir;
 

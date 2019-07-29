@@ -1,6 +1,6 @@
 <?php
 
-namespace EventSchema\Event;
+namespace ServiceSchema\Event;
 
 
 use JsonSchema\Constraints\Constraint;
@@ -23,7 +23,7 @@ class EventValidator
 
     /**
      * @param string $json
-     * @param \EventSchema\Event\Event $event
+     * @param \ServiceSchema\Event\Event $event
      * @return bool
      */
     public function validate(string &$json, Event $event)
