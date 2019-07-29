@@ -1,4 +1,4 @@
-# Microservice Event Schema
+# Service Schema
 
 ## Configuration
 
