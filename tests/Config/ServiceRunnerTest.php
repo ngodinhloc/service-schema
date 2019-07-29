@@ -1,6 +1,6 @@
 <?php
 
-namespace ServiceSchema\Tests\Event;
+namespace ServiceSchema\Tests\Service;
 
 use ServiceSchema\Event\Event;
 use ServiceSchema\Event\EventRegister;
@@ -11,7 +11,7 @@ use JsonSchema\Constraints\Constraint;
 use JsonSchema\Validator;
 use PHPUnit\Framework\TestCase;
 
-class EventValidatorTest extends TestCase
+class ServiceRunnerTest extends TestCase
 {
     protected $testDir;
 
@@ -36,10 +36,10 @@ class EventValidatorTest extends TestCase
         $serviceFactory = new ServiceFactory($eventRegister, $serviceRegister);;
 
         $validator = new Validator();
-        $services = $serviceFactory->createServices($event);
+        $services = $serviceFactory->createService($event);
         /** @var ServiceInterface $service */
         foreach ($services as $service) {
-            $schemaJson = $this->testDir . "\json\schemas\\" . $service->getSchema();
+            $schemaJson = $this->testDir . "\json\schemas\\" . $service->getJsonSchema();
             $schema = json_decode(file_get_contents($schemaJson));
             $validator->validate($message, $schema, Constraint::CHECK_MODE_APPLY_DEFAULTS);
             $this->assertTrue($validator->isValid());

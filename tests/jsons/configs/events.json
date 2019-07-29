@@ -2,14 +2,14 @@
   {
     "event": "Users.afterSaveCommit.Create",
     "services": [
-      "ServiceSchema\\Service\\CreateContact",
-      "ServiceSchema\\Service\\CreateTask"
+      "ServiceSchema\\ServiceSamples\\CreateContact",
+      "ServiceSchema\\ServiceSamples\\CreateTask"
     ]
   },
   {
     "event": "Users.afterSaveCommit.Update",
     "services": [
-      "ServiceSchema\\Service\\UpdateContact"
+      "ServiceSchema\\ServiceSamples\\UpdateContact"
     ]
   }
 ]
