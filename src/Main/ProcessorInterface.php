@@ -2,7 +2,6 @@
 
 namespace ServiceSchema\Main;
 
-use ServiceSchema\Event\Event;
 use ServiceSchema\Event\EventInterface;
 
 interface ProcessorInterface

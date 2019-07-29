@@ -8,7 +8,7 @@ interface ServiceInterface
 {
     /**
      * @param \ServiceSchema\Event\EventInterface $event
-     * @return bool|\ServiceSchema\Event\EventInterface
+     * @return \ServiceSchema\Event\EventInterface|bool
      */
     public function run(EventInterface $event = null);
 

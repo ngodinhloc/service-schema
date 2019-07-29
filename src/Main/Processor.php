@@ -104,11 +104,14 @@ class Processor
         if ($validate) {
             $result = $service->run($event);
             if ($result instanceof Event) {
-                if ($this instanceof ProcessorInterface)
+                if ($this instanceof ProcessorInterface) {
                     return $this->afterRun($event);
+                }
             }
 
             return $result;
         }
+
+        return false;
     }
 }
