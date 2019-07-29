@@ -3,8 +3,10 @@
 namespace ServiceSchema\Tests\Main;
 
 use PHPUnit\Framework\TestCase;
+use ServiceSchema\Event\EventInterface;
 use ServiceSchema\Json\JsonReader;
 use ServiceSchema\Main\Processor;
+use ServiceSchema\Main\ProcessorInterface;
 
 class ProcessorTest extends TestCase
 {
@@ -20,7 +22,6 @@ class ProcessorTest extends TestCase
     {
         parent::setUp();
         $this->testDir = dirname(dirname(__FILE__));
-        $this->processor = new Processor([$this->testDir . "\jsons\\configs\\events.json"], [$this->testDir . "\jsons\\configs\services.json"], $this->testDir);
     }
 
     /**
@@ -32,6 +33,17 @@ class ProcessorTest extends TestCase
     public function testProcess()
     {
         $message = JsonReader::read($this->testDir . "\jsons\\messages\\Users.afterSaveCommit.Create.json");
+        $this->processor = new UserProcess([$this->testDir . "\jsons\\configs\\events.json"], [$this->testDir . "\jsons\\configs\services.json"], $this->testDir);
         $this->processor->process($message);
+    }
+}
+
+class UserProcess extends Processor implements ProcessorInterface
+{
+    public function afterRun(EventInterface $event = null)
+    {
+        echo "I do afterRun";
+
+        return true;
     }
 }
