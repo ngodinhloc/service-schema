@@ -10,6 +10,7 @@ use ServiceSchema\Event\EventInterface;
 use ServiceSchema\Json\JsonReader;
 use ServiceSchema\Service\ServiceFactory;
 use ServiceSchema\Service\ServiceInterface;
+use ServiceSchema\Service\ServiceValidator;
 
 class Processor
 {
@@ -33,16 +34,17 @@ class Processor
      *
      * @param array|null $eventConfigs
      * @param array|null $serviceConfigs
+     * @param string|null $schemaDir
      * @throws \ServiceSchema\Json\Exception\JsonException
      */
-    public function __construct(array $eventConfigs = null, array $serviceConfigs = null)
+    public function __construct(array $eventConfigs = null, array $serviceConfigs = null, string $schemaDir = null)
     {
         $this->eventRegister = new EventRegister($eventConfigs);
         $this->serviceRegister = new ServiceRegister($serviceConfigs);
         $this->serviceFactory = new ServiceFactory();
         $this->eventFactory = new EventFactory();
-        $this->eventRegister->loadEvents();
-        $this->serviceRegister->loadServices();
+        $this->serviceValidator = new ServiceValidator(null, $schemaDir);
+        $this->loadConfigs();
     }
 
     /**
@@ -66,17 +68,30 @@ class Processor
             }
 
             foreach ($services as $serviceName) {
+                var_dump($serviceName);
                 $registerService = $this->serviceRegister->retrieveService($serviceName);
+                var_dump($this->serviceRegister->getServices());
+                var_dump($registerService);
                 if (empty($registerService)) {
                     return false;
                 }
 
+                var_dump($serviceName);
                 $jsonSchema = $registerService[$serviceName];
                 $service = $this->serviceFactory->createService($serviceName, $jsonSchema);
 
                 return $this->runService($event, $service);
             }
         }
+    }
+
+    /**
+     * @throws \ServiceSchema\Json\Exception\JsonException
+     */
+    protected function loadConfigs()
+    {
+        $this->eventRegister->loadEvents();
+        $this->serviceRegister->loadServices();
     }
 
     /**
@@ -88,7 +103,8 @@ class Processor
      */
     protected function runService(EventInterface $event = null, ServiceInterface $service = null)
     {
-        $validate = $this->serviceValidator->validate(JsonReader::decode($event->toJson()), $service);
+        $json = JsonReader::decode($event->toJson());
+        $validate = $this->serviceValidator->validate($json, $service);
         if ($validate) {
             $result = $service->run($event);
             if ($result instanceof Event) {

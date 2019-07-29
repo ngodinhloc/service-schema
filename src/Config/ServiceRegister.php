@@ -21,7 +21,6 @@ class ServiceRegister
     public function __construct(array $configs = null)
     {
         $this->configs = $configs;
-        $this->loadServices();
     }
 
     /**

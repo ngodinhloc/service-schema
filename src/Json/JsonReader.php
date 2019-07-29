@@ -20,7 +20,7 @@ class JsonReader implements JsonReaderInterface
         }
 
         if (!is_file($file)) {
-            throw new JsonException(JsonException::INVALID_JSON_FILE);
+            throw new JsonException(JsonException::INVALID_JSON_FILE.$file);
         }
 
         return file_get_contents($file);
