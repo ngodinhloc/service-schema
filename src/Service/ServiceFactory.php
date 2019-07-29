@@ -2,45 +2,30 @@
 
 namespace ServiceSchema\Service;
 
-use ServiceSchema\Event\Event;
-use ServiceSchema\Event\EventRegister;
+use ServiceSchema\Service\Exception\ServiceException;
 
 class ServiceFactory
 {
-    /** @var \ServiceSchema\Event\EventRegister */
-    protected $eventRegister;
-
-    /** @var \ServiceSchema\Service\ServiceRegister */
-    protected $serviceRegister;
-
     /**
-     * ServiceFactory constructor.
-     *
-     * @param \ServiceSchema\Service\ServiceRegister|null $serviceRegister
+     * @param string|null $serviceClass
+     * @param string|null $schema
+     * @return \ServiceSchema\Service\ServiceInterface|false
+     * @throws \ServiceSchema\Service\Exception\ServiceException
      */
-    public function __construct(EventRegister $eventRegister = null, ServiceRegister $serviceRegister = null)
+    public function createService(string $serviceClass = null, string $schema = null)
     {
-        $this->eventRegister = $eventRegister;
-        $this->serviceRegister = $serviceRegister;
-    }
-
-    /**
-     * @param \ServiceSchema\Event\Event|null $event
-     * @return array
-     */
-    public function createServices(Event $event = null)
-    {
-        $servicesList = $this->eventRegister->retrieveEvent($event->name);
-        $services = [];
-        foreach ($servicesList as $class) {
-            $service = new $class();
-            if ($service instanceof ServiceInterface) {
-                $schema = $this->serviceRegister->retrieveService($class);
-                $service->setSchema($schema);
-                $services[] = $service;
-            }
+        try {
+            $service = new $serviceClass();
+        } catch (\Exception $exception) {
+            throw new ServiceException(ServiceException::INVALID_SERVICE_CLASS . $serviceClass);
         }
 
-        return $services;
+        if ($service instanceof ServiceInterface) {
+            $service->setJsonSchema($schema);
+
+            return $service;
+        }
+
+        return false;
     }
 }

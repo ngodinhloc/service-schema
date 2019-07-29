@@ -1,8 +1,6 @@
 <?php
 
-
-namespace ServiceSchema\Tests\Service;
-
+namespace ServiceSchema\ServiceSamples;
 
 use ServiceSchema\Event\EventInterface;
 use ServiceSchema\Service\Service;

@@ -16,10 +16,10 @@ interface ServiceInterface
      * @param string $schema
      * @return bool
      */
-    public function setSchema(string $schema = null);
+    public function setJsonSchema(string $schema = null);
 
     /**
      * @return string
      */
-    public function getSchema();
+    public function getJsonSchema();
 }

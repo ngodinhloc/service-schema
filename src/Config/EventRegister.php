@@ -22,15 +22,18 @@ class EventRegister
     public function __construct(array $configs = null)
     {
         $this->configs = $configs;
-        $this->loadEvents();
     }
 
     /**
      * @return \ServiceSchema\Config\EventRegister
      * @throws \ServiceSchema\Json\Exception\JsonException
      */
-    protected function loadEvents()
+    public function loadEvents()
     {
+        if (empty($this->configs)) {
+            return $this;
+        }
+
         foreach ($this->configs as $config) {
             $rows = JsonReader::decode(JsonReader::read($config), true);
             foreach ($rows as $row) {
@@ -66,9 +69,47 @@ class EventRegister
     public function retrieveEvent(string $eventName = null)
     {
         if (isset($this->events[$eventName])) {
-            return $this->events[$eventName];
+            return [$eventName => $this->events[$eventName]];
         }
 
         return null;
+    }
+
+    /**
+     * @return array
+     */
+    public function getConfigs()
+    {
+        return $this->configs;
+    }
+
+    /**
+     * @param array $configs
+     * @return \ServiceSchema\Config\EventRegister
+     */
+    public function setConfigs(array $configs = null)
+    {
+        $this->configs = $configs;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    /**
+     * @param array $events
+     * @return \ServiceSchema\Config\EventRegister
+     */
+    public function setEvents(array $events = null)
+    {
+        $this->events = $events;
+
+        return $this;
     }
 }

@@ -28,14 +28,14 @@ class ServiceRegister
      * @return \ServiceSchema\Config\ServiceRegister
      * @throws \ServiceSchema\Json\Exception\JsonException
      */
-    protected function loadServices()
+    public function loadServices()
     {
         foreach ($this->configs as $config) {
             $rows = JsonReader::decode(JsonReader::read($config), true);
             foreach ($rows as $row) {
-                $service = $row["service"];
-                $schema = $row["schema"];
-                $this->registerService($service, $schema);
+                if (isset($row["service"]) && isset($row["schema"])) {
+                    $this->registerService($row["service"], $row["schema"]);
+                }
             }
         }
 
@@ -63,9 +63,47 @@ class ServiceRegister
     public function retrieveService(string $serviceName = null)
     {
         if (isset($this->services[$serviceName])) {
-            return $this->services[$serviceName];
+            return [$serviceName => $this->services[$serviceName]];
         }
 
         return null;
+    }
+
+    /**
+     * @return array
+     */
+    public function getConfigs(): array
+    {
+        return $this->configs;
+    }
+
+    /**
+     * @param array $configs
+     * @return \ServiceSchema\Config\ServiceRegister
+     */
+    public function setConfigs(array $configs = null)
+    {
+        $this->configs = $configs;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getServices()
+    {
+        return $this->services;
+    }
+
+    /**
+     * @param array $services
+     * @return \ServiceSchema\Config\ServiceRegister
+     */
+    public function setServices(array $services = null)
+    {
+        $this->services = $services;
+
+        return $this;
     }
 }

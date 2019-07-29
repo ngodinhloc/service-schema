@@ -7,23 +7,23 @@ namespace ServiceSchema\Service;
 class Service
 {
     /** @var string */
-    protected $schema;
+    protected $jsonSchema;
 
     /**
      * @return string
      */
-    public function getSchema()
+    public function getJsonSchema()
     {
-        return $this->schema;
+        return $this->jsonSchema;
     }
 
     /**
      * @param string $schema
      * @return Service
      */
-    public function setSchema(string $schema = null)
+    public function setJsonSchema(string $schema = null)
     {
-        $this->schema = $schema;
+        $this->jsonSchema = $schema;
 
         return $this;
     }
