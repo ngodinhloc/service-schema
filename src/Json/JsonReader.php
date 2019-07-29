@@ -8,22 +8,6 @@ use ServiceSchema\Json\Exception\JsonException;
 
 class JsonReader implements JsonReaderInterface
 {
-    /** @var string $file */
-    protected $file;
-
-    /** @var string $content */
-    protected $content;
-
-    /**
-     * JsonReader constructor.
-     *
-     * @param string|null $file
-     */
-    public function __construct(string $file = null)
-    {
-        $this->file = $file;
-    }
-
     /**
      * @param string|null $file
      * @return string
