@@ -9,7 +9,7 @@ class EventRegisterTest extends TestCase
 {
     protected $testDir;
 
-    /** @var EventRegister */
+    /** @var EventRegister $eventRegister */
     protected $eventRegister;
 
     /**
