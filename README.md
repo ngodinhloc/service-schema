@@ -232,6 +232,6 @@ class CreateContact extends Service implements ServiceInterface
 ### Processor
 <pre>
 $message = '{"name":"Users.afterSaveCommit.Create","time":"20190730123000","payload":{"user":{"data":{"name":"Ken"}},"account":{"data":{"name":"Brighte"}}}}';
-$this->processor = new Processor(["events.json"], ["services.json"], "serviceSchemaDir");
-$result = $this->processor->process($message);
+$processor = new Processor(["events.json"], ["services.json"], "serviceSchemaDir");
+$result = $processor->process($message);
 </pre>
