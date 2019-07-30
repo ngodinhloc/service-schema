@@ -1,5 +1,5 @@
 # Service Schema
-Event based service processor for microservices.
+Using json schema to validate Event and process service.
 
 Event is defined by json
 <pre>
