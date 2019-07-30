@@ -207,6 +207,7 @@ $event->setTime("20190730123000");
 $event->setPayload(["user" => ["data" => ["name" => "Ken"]], "account" => ["data" => ["name" => "Brighte"]]]);
 $message = $event->toJson();
 // '{"name":"Users.afterSaveCommit.Create","time":"20190730123000","payload":{"user":{"data":{"name":"Ken"}},"account":{"data":{"name":"Brighte"}}}}'
+// this message is used to push to SQS or other services
 </pre>
 
 ### Service
@@ -231,7 +232,18 @@ class CreateContact extends Service implements ServiceInterface
 
 ### Processor
 <pre>
+// Receive message from SQS or other services
 $message = '{"name":"Users.afterSaveCommit.Create","time":"20190730123000","payload":{"user":{"data":{"name":"Ken"}},"account":{"data":{"name":"Brighte"}}}}';
+// config the Processor
 $processor = new Processor(["events.json"], ["services.json"], "serviceSchemaDir");
+// process the message
 $result = $processor->process($message);
+/*
+ * In this example, event "Users.afterSaveCommit.Create" has 02 services listening to it (configued in event.json)
+ * "ServiceSchema\\ServiceSamples\\CreateContact", "ServiceSchema\\ServiceSamples\\CreateTask"
+ * When $processor->process(message): CreateContact->run(Event) and CreateTask->run(Event) will be executed.
+ * Service CreateContact has 02 callback services (configured in services.json): 
+ * "ServiceSchema\\ServiceSamples\\PushMessageToSqs","ServiceSchema\\ServiceSamples\\PushMessageToLog"
+ * When CreateContact->run(Event) return an Event then PushMessageToSqs->run(Event) and PushMessageToLog->run(Event) will be executed
+ */
 </pre>
