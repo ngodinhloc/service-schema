@@ -109,6 +109,11 @@ events.json
   }
 ]
 </pre>
+
+In this events.json:
+- There are two events that the microservice is listening to: "Users.afterSaveCommit.Create", "Users.afterSaveCommit.Update"
+- Each of event have a list of services that will run the event
+
 services.json
 <pre>
 [
@@ -133,6 +138,10 @@ services.json
   }
 ]
 </pre>
+
+In this services.json:
+- There are 03 services:  "ServiceSchema\\ServiceSamples\\CreateContact", "ServiceSchema\\ServiceSamples\\UpdateContact", "ServiceSchema\\ServiceSamples\\CreateTask",
+- Each service has a schema and a list of callback services
 
 ### services schema
 CreateContact.json
@@ -199,6 +208,12 @@ CreateContact.json
 }
 </pre>
 
+In this CreateContact.json:
+- It requires the message to have "name" and "payload"
+- "payload" requires "user" and "account"
+- "user" requires "data"
+- "account" requires "data"
+
 ### Event
 <pre>
 $event = new Event();
@@ -239,7 +254,7 @@ $processor = new Processor(["events.json"], ["services.json"], "serviceSchemaDir
 // process the message
 $result = $processor->process($message);
 /*
- * In this example, event "Users.afterSaveCommit.Create" has 02 services listening to it (configued in event.json)
+ * In this example, event "Users.afterSaveCommit.Create" has 02 services listening to it (configued in events.json)
  * "ServiceSchema\\ServiceSamples\\CreateContact", "ServiceSchema\\ServiceSamples\\CreateTask"
  * When $processor->process(message): CreateContact->run(Event) and CreateTask->run(Event) will be executed.
  * Service CreateContact has 02 callback services (configured in services.json): 
