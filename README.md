@@ -111,7 +111,7 @@ events.json
 </pre>
 
 In this events.json:
-- There are two events that the microservice is listening to: "Users.afterSaveCommit.Create", "Users.afterSaveCommit.Update"
+- There are 02 events that the microservice is listening to: "Users.afterSaveCommit.Create", "Users.afterSaveCommit.Update"
 - Each of event have a list of services that will run the event
 
 services.json
