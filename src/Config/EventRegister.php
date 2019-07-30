@@ -13,6 +13,9 @@ class EventRegister
     /** @var array $events */
     protected $events = [];
 
+    const INDEX_EVENT = "event";
+    const INDEX_SERVICES = "services";
+
     /**
      * EventRegister constructor.
      *
@@ -37,8 +40,8 @@ class EventRegister
         foreach ($this->configs as $config) {
             $rows = JsonReader::decode(JsonReader::read($config), true);
             foreach ($rows as $row) {
-                $eventName = $row["event"];
-                $services = $row["services"];
+                $eventName = $row[self::INDEX_EVENT];
+                $services = $row[self::INDEX_SERVICES];
                 $this->registerEvent($eventName, $services);
             }
         }
