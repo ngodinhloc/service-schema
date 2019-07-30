@@ -85,6 +85,9 @@ class Processor implements ProcessorInterface
                 $jsonSchema = $registerService[$serviceName][ServiceRegister::INDEX_SCHEMA];
                 $callbacks = $registerService[$serviceName][ServiceRegister::INDEX_CALLBACKS];
                 $service = $this->serviceFactory->createService($serviceName, $jsonSchema);
+                if (empty($service)) {
+                    continue;
+                }
 
                 $this->runService($event, $service, $callbacks);
             }
@@ -135,6 +138,10 @@ class Processor implements ProcessorInterface
 
         foreach ($callbacks as $callback) {
             $service = $this->serviceFactory->createService($callback);
+            if (empty($service)) {
+                continue;
+            }
+
             $service->run($event);
         }
 
