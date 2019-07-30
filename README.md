@@ -259,6 +259,6 @@ $result = $processor->process($message);
  * When $processor->process(message): CreateContact->run(Event) and CreateTask->run(Event) will be executed.
  * Service CreateContact has 02 callback services (configured in services.json): 
  * "ServiceSchema\\ServiceSamples\\PushMessageToSqs","ServiceSchema\\ServiceSamples\\PushMessageToLog"
- * When CreateContact->run(Event) return an Event then PushMessageToSqs->run(Event) and PushMessageToLog->run(Event) will be executed
+ * When CreateContact->run(Event) returns an Event then PushMessageToSqs->run(Event) and PushMessageToLog->run(Event) will be executed
  */
 </pre>
