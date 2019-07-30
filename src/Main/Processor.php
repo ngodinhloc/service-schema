@@ -65,8 +65,11 @@ class Processor implements ProcessorInterface
     public function process(string $message = null)
     {
         $event = $this->eventFactory->createEvent($message);
-        $registeredEvents = $this->eventRegister->retrieveEvent($event->getName());
+        if (empty($event)) {
+            return false;
+        }
 
+        $registeredEvents = $this->eventRegister->retrieveEvent($event->getName());
         if (empty($registeredEvents)) {
             return false;
         }
