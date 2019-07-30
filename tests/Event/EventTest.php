@@ -29,7 +29,14 @@ class EventTest extends TestCase
         $event->setTime("SomeTimeString");
         $event->setPayload(["name" => "Ken"]);
         $json = $event->toJson();
-        // push to SQS
+        $this->assertTrue(is_string($json));
+        $this->assertEquals('{"name":"Test.Event.Name","time":"SomeTimeString","payload":{"name":"Ken"}}', $json);
+
+        $event = new Event();
+        $event->setName("Test.Event.Name");
+        $event->setTime("SomeTimeString");
+        $event->setPayload((object)["name" => "Ken"]);
+        $json = $event->toJson();
         $this->assertTrue(is_string($json));
         $this->assertEquals('{"name":"Test.Event.Name","time":"SomeTimeString","payload":{"name":"Ken"}}', $json);
     }
