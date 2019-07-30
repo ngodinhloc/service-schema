@@ -109,6 +109,10 @@ class Processor implements ProcessorInterface
             throw  new ServiceException(ServiceException::INVALIDATED_JSON_STRING . json_encode($validator->getErrors()));
         }
 
+        if (isset($json->payload)) {
+            $event->setPayload($json->payload);
+        }
+
         $result = $service->run($event);
         if (($result instanceof EventInterface) && !empty($callbacks)) {
             return $this->runCallbacks($result, $callbacks);

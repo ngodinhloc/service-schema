@@ -12,7 +12,7 @@ class Event implements EventInterface
     /** @var string */
     public $time;
 
-    /** @var array */
+    /** @var array|null|\stdClass */
     public $payload;
 
     /**
@@ -77,7 +77,7 @@ class Event implements EventInterface
     }
 
     /**
-     * @return array
+     * @return array|null|\stdClass
      */
     public function getPayload()
     {
