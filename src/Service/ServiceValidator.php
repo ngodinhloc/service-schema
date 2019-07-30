@@ -30,7 +30,7 @@ class ServiceValidator
     /**
      * @param \stdClass $jsonObject
      * @param \ServiceSchema\Service\ServiceInterface $service
-     * @return bool
+     * @return \JsonSchema\Validator
      * @throws \ServiceSchema\Service\Exception\ServiceException
      * @throws \ServiceSchema\Json\Exception\JsonException
      */
@@ -48,6 +48,6 @@ class ServiceValidator
 
         $this->validator->validate($jsonObject, $schema, Constraint::CHECK_MODE_APPLY_DEFAULTS);
 
-        return $this->validator->isValid();
+        return $this->validator;
     }
 }
