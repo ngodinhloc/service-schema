@@ -27,17 +27,17 @@ class EventTest extends TestCase
         $event = new Event();
         $event->setName("Test.Event.Name");
         $event->setTime("SomeTimeString");
-        $event->setPayload(["name" => "Ken"]);
+        $event->setPayload((object)["name" => "Ken"]);
         $json = $event->toJson();
         $this->assertTrue(is_string($json));
         $this->assertEquals('{"name":"Test.Event.Name","time":"SomeTimeString","payload":{"name":"Ken"}}', $json);
 
         $event = new Event();
-        $event->setName("Test.Event.Name");
-        $event->setTime("SomeTimeString");
-        $event->setPayload((object)["name" => "Ken"]);
+        $event->setName("Users.afterSaveCommit.Create");
+        $event->setTime("20190730123000");
+        $event->setPayload(["user" => ["data" => ["name" => "Ken"]], "account" => ["data" => ["name" => "Brighte"]]]);
         $json = $event->toJson();
         $this->assertTrue(is_string($json));
-        $this->assertEquals('{"name":"Test.Event.Name","time":"SomeTimeString","payload":{"name":"Ken"}}', $json);
+        $this->assertEquals('{"name":"Users.afterSaveCommit.Create","time":"20190730123000","payload":{"user":{"data":{"name":"Ken"}},"account":{"data":{"name":"Brighte"}}}}', $json);
     }
 }
