@@ -4,8 +4,8 @@ namespace ServiceSchema\Main;
 
 use ServiceSchema\Config\EventRegister;
 use ServiceSchema\Config\ServiceRegister;
-use ServiceSchema\Event\EventFactory;
-use ServiceSchema\Event\EventInterface;
+use ServiceSchema\Event\MessageFactory;
+use ServiceSchema\Event\MessageInterface;
 use ServiceSchema\Json\JsonReader;
 use ServiceSchema\Service\Exception\ServiceException;
 use ServiceSchema\Service\ServiceFactory;
@@ -20,8 +20,8 @@ class Processor implements ProcessorInterface
     /** @var \ServiceSchema\Config\ServiceRegister */
     protected $serviceRegister;
 
-    /** @var \ServiceSchema\Event\EventFactory */
-    protected $eventFactory;
+    /** @var \ServiceSchema\Event\MessageFactory */
+    protected $messageFactory;
 
     /** @var \ServiceSchema\Service\ServiceFactory */
     protected $serviceFactory;
@@ -42,7 +42,7 @@ class Processor implements ProcessorInterface
         $this->eventRegister = new EventRegister($eventConfigs);
         $this->serviceRegister = new ServiceRegister($serviceConfigs);
         $this->serviceFactory = new ServiceFactory();
-        $this->eventFactory = new EventFactory();
+        $this->messageFactory = new MessageFactory();
         $this->serviceValidator = new ServiceValidator(null, $schemaDir);
         $this->loadConfigs();
     }
@@ -57,19 +57,19 @@ class Processor implements ProcessorInterface
     }
 
     /**
-     * @param string|null $message
+     * @param string|null $json
      * @return bool
      * @throws \ServiceSchema\Json\Exception\JsonException
      * @throws \ServiceSchema\Service\Exception\ServiceException
      */
-    public function process(string $message = null)
+    public function process(string $json = null)
     {
-        $event = $this->eventFactory->createEvent($message);
-        if (empty($event)) {
+        $message = $this->messageFactory->createMessage($json);
+        if (empty($message)) {
             return false;
         }
 
-        $registeredEvents = $this->eventRegister->retrieveEvent($event->getName());
+        $registeredEvents = $this->eventRegister->retrieveEvent($message->getEvent());
         if (empty($registeredEvents)) {
             return false;
         }
@@ -92,7 +92,7 @@ class Processor implements ProcessorInterface
                     continue;
                 }
 
-                $this->runService($event, $service, $callbacks);
+                $this->runService($message, $service, $callbacks);
             }
         }
 
@@ -100,27 +100,27 @@ class Processor implements ProcessorInterface
     }
 
     /**
-     * @param \ServiceSchema\Event\EventInterface|null $event
+     * @param \ServiceSchema\Event\MessageInterface|null $message
      * @param \ServiceSchema\Service\ServiceInterface|null $service
      * @param array $callbacks
      * @return bool
      * @throws \ServiceSchema\Json\Exception\JsonException
      * @throws \ServiceSchema\Service\Exception\ServiceException
      */
-    public function runService(EventInterface $event = null, ServiceInterface $service = null, array $callbacks = null)
+    public function runService(MessageInterface $message = null, ServiceInterface $service = null, array $callbacks = null)
     {
-        $json = JsonReader::decode($event->toJson());
+        $json = JsonReader::decode($message->toJson());
         $validator = $this->serviceValidator->validate($json, $service);
         if (!$validator->isValid()) {
             throw  new ServiceException(ServiceException::INVALIDATED_JSON_STRING . json_encode($validator->getErrors()));
         }
 
         if (isset($json->payload)) {
-            $event->setPayload($json->payload);
+            $message->setPayload($json->payload);
         }
 
-        $result = $service->run($event);
-        if (($result instanceof EventInterface) && !empty($callbacks)) {
+        $result = $service->consume($message);
+        if (($result instanceof MessageInterface) && !empty($callbacks)) {
             return $this->runCallbacks($result, $callbacks);
         }
 
@@ -128,12 +128,12 @@ class Processor implements ProcessorInterface
     }
 
     /**
-     * @param \ServiceSchema\Event\EventInterface|null $event
+     * @param \ServiceSchema\Event\MessageInterface|null $event
      * @param array|null $callbacks
      * @return bool
      * @throws \ServiceSchema\Service\Exception\ServiceException
      */
-    public function runCallbacks(EventInterface $event, array $callbacks = null)
+    public function runCallbacks(MessageInterface $event, array $callbacks = null)
     {
         if (empty($callbacks)) {
             return true;
@@ -145,7 +145,7 @@ class Processor implements ProcessorInterface
                 continue;
             }
 
-            $service->run($event);
+            $service->consume($event);
         }
 
         return true;

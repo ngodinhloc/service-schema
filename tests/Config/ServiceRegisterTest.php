@@ -30,9 +30,10 @@ class ServiceRegisterTest extends TestCase
     {
         $this->serviceRegister->loadServices();
         $services = $this->serviceRegister->getServices();
+        var_dump($services);
         $this->assertTrue(is_array($services));
-        $this->assertTrue(isset($services["ServiceSchema\Service\CreateContact"]));
-        $this->assertTrue(isset($services["ServiceSchema\Service\UpdateContact"]));
+        $this->assertTrue(isset($services["ServiceSchema\ServiceSamples\CreateContact"]));
+        $this->assertTrue(isset($services["ServiceSchema\ServiceSamples\UpdateContact"]));
     }
 
     /**
@@ -46,7 +47,7 @@ class ServiceRegisterTest extends TestCase
         $services = $this->serviceRegister->getServices();
         $this->assertTrue(is_array($services));
         $this->assertTrue(isset($services["Service.Name"]));
-        $this->assertEquals("SomeServiceSchema", $services["Service.Name"]);
+        $this->assertEquals("SomeServiceSchema", $services["Service.Name"]['schema']);
     }
 
     /**
@@ -60,6 +61,6 @@ class ServiceRegisterTest extends TestCase
         $service = $this->serviceRegister->retrieveService("Service.Name");
         $this->assertTrue(is_array($service));
         $this->assertTrue(isset($service["Service.Name"]));
-        $this->assertEquals("SomeServiceSchema", $service["Service.Name"]);
+        $this->assertEquals("SomeServiceSchema", $service["Service.Name"]['schema']);
     }
 }

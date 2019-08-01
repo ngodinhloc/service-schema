@@ -3,7 +3,7 @@
 namespace ServiceSchema\Event;
 
 
-interface EventInterface
+interface MessageInterface
 {
     /**
      * @return false|string
@@ -13,7 +13,7 @@ interface EventInterface
     /**
      * @return string
      */
-    public function getName();
+    public function getEvent();
 
     /**
      * @return string
@@ -22,15 +22,15 @@ interface EventInterface
 
     /**
      * @param string $time
-     * @return \ServiceSchema\Event\Event
+     * @return \ServiceSchema\Event\Message
      */
     public function setTime(string $time = null);
 
     /**
      * @param string $name
-     * @return \ServiceSchema\Event\Event
+     * @return \ServiceSchema\Event\Message
      */
-    public function setName(string $name = null);
+    public function setEvent(string $name = null);
 
     /**
      * @return array|null|\stdClass
@@ -39,7 +39,7 @@ interface EventInterface
 
     /**
      * @param array|\stdClass $payload
-     * @return \ServiceSchema\Event\Event
+     * @return \ServiceSchema\Event\Message
      */
     public function setPayload($payload = null);
 }

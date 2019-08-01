@@ -2,15 +2,15 @@
 
 namespace ServiceSchema\Service;
 
-use ServiceSchema\Event\EventInterface;
+use ServiceSchema\Event\MessageInterface;
 
 interface ServiceInterface
 {
     /**
-     * @param \ServiceSchema\Event\EventInterface $event
-     * @return \ServiceSchema\Event\EventInterface|bool
+     * @param \ServiceSchema\Event\MessageInterface $event
+     * @return \ServiceSchema\Event\MessageInterface|bool
      */
-    public function run(EventInterface $event = null);
+    public function consume(MessageInterface $event = null);
 
     /**
      * @param string $schema

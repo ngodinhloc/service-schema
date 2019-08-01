@@ -2,29 +2,29 @@
 
 namespace ServiceSchema\Main;
 
-use ServiceSchema\Event\EventInterface;
+use ServiceSchema\Event\MessageInterface;
 use ServiceSchema\Service\ServiceInterface;
 
 interface ProcessorInterface
 {
     /**
-     * @param string|null $message
+     * @param string|null $json
      * @return mixed
      */
-    public function process(string $message = null);
+    public function process(string $json = null);
 
     /**
-     * @param \ServiceSchema\Event\EventInterface|null $event
+     * @param \ServiceSchema\Event\MessageInterface|null $message
      * @param \ServiceSchema\Service\ServiceInterface|null $service
      * @param array|null $callbacks
      * @return mixed
      */
-    public function runService(EventInterface $event = null, ServiceInterface $service = null, array $callbacks = null);
+    public function runService(MessageInterface $message = null, ServiceInterface $service = null, array $callbacks = null);
 
     /**
-     * @param \ServiceSchema\Event\EventInterface $event
+     * @param \ServiceSchema\Event\MessageInterface $event
      * @param array|null $callbacks
      * @return mixed
      */
-    public function runCallbacks(EventInterface $event, array $callbacks = null);
+    public function runCallbacks(MessageInterface $event, array $callbacks = null);
 }
