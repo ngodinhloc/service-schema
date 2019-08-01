@@ -229,20 +229,21 @@ $message = $event->toJson();
 <pre>
 namespace ServiceSchema\ServiceSamples;
 
-use ServiceSchema\Event\Event;
-use ServiceSchema\Event\EventInterface;
+use ServiceSchema\Event\Message;
+use ServiceSchema\Event\MessageInterface;
 use ServiceSchema\Service\Service;
 use ServiceSchema\Service\ServiceInterface;
 
 class CreateContact extends Service implements ServiceInterface
 {
-    public function run(EventInterface $event = null)
+    public function consume(MessageInterface $event = null)
     {
         echo "CreateContact";
 
-        return new Event();
+        return new Message();
     }
 }
+
 </pre>
 
 ### Processor
