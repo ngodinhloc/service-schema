@@ -1,9 +1,9 @@
 {
   "name": "brightecapital/service-schema",
-  "description": "Microservice Event Schema",
+  "description": "Service Schema for Microservice",
   "keywords": [
     "Microservice",
-    "Event",
+    "Service",
     "Schema"
   ],
   "homepage": "https://github.com/brightecapital/",
