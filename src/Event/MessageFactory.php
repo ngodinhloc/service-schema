@@ -24,7 +24,7 @@ class MessageFactory
             return false;
         }
 
-        return new Message($object->name, isset($object->time) ? $object->time : null, $object->payload);
+        return new Message($object->event, isset($object->time) ? $object->time : null, $object->payload);
     }
 
     /**
@@ -37,7 +37,7 @@ class MessageFactory
             return false;
         }
 
-        if (!isset($object->name) || !isset($object->payload)) {
+        if (!isset($object->event) || !isset($object->payload)) {
             return false;
         }
 
