@@ -68,7 +68,7 @@ class Processor implements ProcessorInterface
     {
         $message = $this->messageFactory->createMessage($json);
         if (empty($message)) {
-            throw new ProcessorException(ProcessorException::FAILED_TO_CREATE_MESSAGE);
+            throw new ProcessorException(ProcessorException::FAILED_TO_CREATE_MESSAGE . $json);
         }
 
         $registeredEvents = $this->eventRegister->retrieveEvent($message->getEvent());
