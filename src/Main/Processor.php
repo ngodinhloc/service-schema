@@ -152,4 +152,99 @@ class Processor implements ProcessorInterface
 
         return true;
     }
+
+    /**
+     * @return \ServiceSchema\Config\EventRegister
+     */
+    public function getEventRegister()
+    {
+        return $this->eventRegister;
+    }
+
+    /**
+     * @param \ServiceSchema\Config\EventRegister $eventRegister
+     * @return \ServiceSchema\Main\Processor
+     */
+    public function setEventRegister(EventRegister $eventRegister = null)
+    {
+        $this->eventRegister = $eventRegister;
+
+        return $this;
+    }
+
+    /**
+     * @return \ServiceSchema\Config\ServiceRegister
+     */
+    public function getServiceRegister()
+    {
+        return $this->serviceRegister;
+    }
+
+    /**
+     * @param \ServiceSchema\Config\ServiceRegister $serviceRegister
+     * @return \ServiceSchema\MainProcessor
+     */
+    public function setServiceRegister(ServiceRegister $serviceRegister = null)
+    {
+        $this->serviceRegister = $serviceRegister;
+
+        return $this;
+    }
+
+    /**
+     * @return \ServiceSchema\Event\MessageFactory
+     */
+    public function getMessageFactory()
+    {
+        return $this->messageFactory;
+    }
+
+    /**
+     * @param \ServiceSchema\Event\MessageFactory $messageFactory
+     * @return \ServiceSchema\Main\Processor
+     */
+    public function setMessageFactory(MessageFactory $messageFactory = null)
+    {
+        $this->messageFactory = $messageFactory;
+
+        return $this;
+    }
+
+    /**
+     * @return \ServiceSchema\Service\ServiceFactory
+     */
+    public function getServiceFactory()
+    {
+        return $this->serviceFactory;
+    }
+
+    /**
+     * @param \ServiceSchema\Service\ServiceFactory $serviceFactory
+     * @return \ServiceSchema\Main\Processor
+     */
+    public function setServiceFactory(ServiceFactory $serviceFactory = null)
+    {
+        $this->serviceFactory = $serviceFactory;
+
+        return $this;
+    }
+
+    /**
+     * @return \ServiceSchema\Service\ServiceValidator
+     */
+    public function getServiceValidator()
+    {
+        return $this->serviceValidator;
+    }
+
+    /**
+     * @param \ServiceSchema\Service\ServiceValidator $serviceValidator
+     * @return \ServiceSchema\Main\Processor
+     */
+    public function setServiceValidator(ServiceValidator $serviceValidator = null)
+    {
+        $this->serviceValidator = $serviceValidator;
+
+        return $this;
+    }
 }
