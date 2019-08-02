@@ -33,6 +33,9 @@ class ServiceRegister
      */
     public function loadServices()
     {
+        if (empty($this->configs)) {
+            return $this;
+        }
         foreach ($this->configs as $config) {
             $rows = JsonReader::decode(JsonReader::read($config), true);
             foreach ($rows as $row) {
