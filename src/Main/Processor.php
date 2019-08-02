@@ -7,6 +7,7 @@ use ServiceSchema\Config\ServiceRegister;
 use ServiceSchema\Event\MessageFactory;
 use ServiceSchema\Event\MessageInterface;
 use ServiceSchema\Json\JsonReader;
+use ServiceSchema\Main\Exception\ProcessorException;
 use ServiceSchema\Service\Exception\ServiceException;
 use ServiceSchema\Service\ServiceFactory;
 use ServiceSchema\Service\ServiceInterface;
@@ -61,17 +62,18 @@ class Processor implements ProcessorInterface
      * @return bool
      * @throws \ServiceSchema\Json\Exception\JsonException
      * @throws \ServiceSchema\Service\Exception\ServiceException
+     * @throws \ServiceSchema\Main\Exception\ProcessorException
      */
     public function process(string $json = null)
     {
         $message = $this->messageFactory->createMessage($json);
         if (empty($message)) {
-            return false;
+            throw new ProcessorException(ProcessorException::FAILED_TO_CREATE_MESSAGE);
         }
 
         $registeredEvents = $this->eventRegister->retrieveEvent($message->getEvent());
         if (empty($registeredEvents)) {
-            return false;
+            throw new ProcessorException(ProcessorException::NO_REGISTER_EVENTS . $message->getEvent());
         }
 
         foreach ($registeredEvents as $eventName => $services) {
