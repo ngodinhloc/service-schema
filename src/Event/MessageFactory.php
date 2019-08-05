@@ -7,6 +7,10 @@ use ServiceSchema\Json\JsonReader;
 
 class MessageFactory
 {
+    const STATUS_NEW = "new";
+    const STATUS_FAILED = "failed";
+    const STATUS_SUCCEEDED = "succeeded";
+
     /**
      * @param string|null $json
      * @return false|\ServiceSchema\Event\Message
@@ -28,7 +32,7 @@ class MessageFactory
             isset($object->event) ? $object->event : null,
             isset($object->time) ? $object->time : null,
             isset($object->payload) ? $object->payload : null,
-            isset($object->status) ? $object->status : Message::STATUS_NEW
+            isset($object->status) ? $object->status : self::STATUS_NEW
         );
     }
 

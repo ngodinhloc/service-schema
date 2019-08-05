@@ -18,10 +18,6 @@ class Message implements MessageInterface
     /** @var string */
     protected $status;
 
-    const STATUS_NEW = "new";
-    const STATUS_FAILED = "failed";
-    const STATUS_SUCCEEDED = "succeeded";
-
     /**
      * Event constructor.
      *
@@ -30,7 +26,7 @@ class Message implements MessageInterface
      * @param string|null $time
      * @param string|null $status
      */
-    public function __construct(string $event = null, string $time = null, $payload = null, string $status = self::STATUS_NEW)
+    public function __construct(string $event = null, string $time = null, $payload = null, string $status = null)
     {
         $this->event = $event;
         $this->time = $time ? $time : date("YmdHis");
