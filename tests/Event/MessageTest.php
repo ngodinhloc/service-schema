@@ -28,9 +28,10 @@ class MessageTest extends TestCase
         $event->setEvent("Test.Event.Name");
         $event->setTime("SomeTimeString");
         $event->setPayload((object)["name" => "Ken"]);
+        $event->setStatus("new");
         $json = $event->toJson();
         $this->assertTrue(is_string($json));
-        $this->assertEquals('{"name":"Test.Event.Name","time":"SomeTimeString","payload":{"name":"Ken"}}', $json);
+        $this->assertEquals('{"event":"Test.Event.Name","time":"SomeTimeString","payload":{"name":"Ken"},"status":"new"}', $json);
 
         $event = new Message();
         $event->setEvent("Users.afterSaveCommit.Create");
@@ -38,6 +39,6 @@ class MessageTest extends TestCase
         $event->setPayload(["user" => ["data" => ["name" => "Ken"]], "account" => ["data" => ["name" => "Brighte"]]]);
         $json = $event->toJson();
         $this->assertTrue(is_string($json));
-        $this->assertEquals('{"name":"Users.afterSaveCommit.Create","time":"20190730123000","payload":{"user":{"data":{"name":"Ken"}},"account":{"data":{"name":"Brighte"}}}}', $json);
+        $this->assertEquals('{"event":"Users.afterSaveCommit.Create","time":"20190730123000","payload":{"user":{"data":{"name":"Ken"}},"account":{"data":{"name":"Brighte"}}},"status":"new"}', $json);
     }
 }
