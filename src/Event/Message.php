@@ -7,13 +7,20 @@ use ServiceSchema\Json\JsonReader;
 class Message implements MessageInterface
 {
     /** @var string */
-    public $event;
+    protected $event;
 
     /** @var string */
-    public $time;
+    protected $time;
 
     /** @var array|null|\stdClass */
-    public $payload;
+    protected $payload;
+
+    /** @var string */
+    protected $status;
+
+    const STATUS_NEW = "new";
+    const STATUS_FAILED = "failed";
+    const STATUS_SUCCEEDED = "succeeded";
 
     /**
      * Event constructor.
@@ -21,12 +28,14 @@ class Message implements MessageInterface
      * @param string|null $event
      * @param array|null|\stdClass $payload
      * @param string|null $time
+     * @param string|null $status
      */
-    public function __construct(string $event = null, string $time = null, $payload = null)
+    public function __construct(string $event = null, string $time = null, $payload = null, string $status = self::STATUS_NEW)
     {
         $this->event = $event;
-        $this->time = $time ?? date("YmdHis");
+        $this->time = $time ? $time : date("YmdHis");
         $this->payload = $payload;
+        $this->status = $status;
     }
 
     /**
@@ -95,4 +104,22 @@ class Message implements MessageInterface
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     * @return \ServiceSchema\Event\Message
+     */
+    public function setStatus(string $status = null)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
 }

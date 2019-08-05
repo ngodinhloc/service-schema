@@ -21,10 +21,15 @@ class MessageFactory
         $object = JsonReader::decode($json);
 
         if (!$this->validate($object)) {
-            return false;
+            throw new JsonException(JsonException::INVALID_JSON_CONTENT . $json);
         }
 
-        return new Message($object->event, isset($object->time) ? $object->time : null, $object->payload);
+        return new Message(
+            isset($object->event) ? $object->event : null,
+            isset($object->time) ? $object->time : null,
+            isset($object->payload) ? $object->payload : null,
+            isset($object->status) ? $object->status : Message::STATUS_NEW
+        );
     }
 
     /**
@@ -34,10 +39,6 @@ class MessageFactory
     public function validate(\stdClass $object = null)
     {
         if (!is_object($object)) {
-            return false;
-        }
-
-        if (!isset($object->event) || !isset($object->payload)) {
             return false;
         }
 

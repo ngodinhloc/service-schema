@@ -42,4 +42,15 @@ interface MessageInterface
      * @return \ServiceSchema\Event\Message
      */
     public function setPayload($payload = null);
+
+    /**
+     * @return string
+     */
+    public function getStatus();
+
+    /**
+     * @param string $status
+     * @return \ServiceSchema\Event\Message
+     */
+    public function setStatus(string $status = null);
 }
