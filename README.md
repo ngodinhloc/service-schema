@@ -1,5 +1,5 @@
 # Service Schema
-Using json schema to validate Event and process service.
+Using json schema to validate Event and process services.
 
 Event is defined by json
 <pre>
