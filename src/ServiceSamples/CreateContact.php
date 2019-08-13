@@ -9,7 +9,7 @@ use ServiceSchema\Service\ServiceInterface;
 
 class CreateContact extends Service implements ServiceInterface
 {
-    public function consume(MessageInterface $event = null)
+    public function consume(MessageInterface $message = null)
     {
         echo "CreateContact";
 

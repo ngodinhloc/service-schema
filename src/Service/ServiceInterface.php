@@ -7,10 +7,10 @@ use ServiceSchema\Event\MessageInterface;
 interface ServiceInterface
 {
     /**
-     * @param \ServiceSchema\Event\MessageInterface $event
+     * @param \ServiceSchema\Event\MessageInterface $message
      * @return \ServiceSchema\Event\MessageInterface|bool
      */
-    public function consume(MessageInterface $event = null);
+    public function consume(MessageInterface $message = null);
 
     /**
      * @param string $schema

@@ -8,7 +8,7 @@ use ServiceSchema\Service\ServiceInterface;
 
 class UpdateContact extends Service implements ServiceInterface
 {
-    public function consume(MessageInterface $event = null)
+    public function consume(MessageInterface $message = null)
     {
         echo "UpdateContact";
 
