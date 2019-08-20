@@ -7,7 +7,7 @@ Using json schema to validate event messages and process services.
 Event is defined by json
 <pre>
 {
-  "name": "Users.afterSaveCommit.Create",
+  "event": "Users.afterSaveCommit.Create",
   "time": "20190726032212",
   "payload": {
     "user": {
@@ -27,7 +27,7 @@ Service has a json schema that use to validate against the Event json
 {
   "type": "object",
   "properties": {
-    "name": {
+    "event": {
       "type": "string",
       "minLength": 0,
       "maxLength": 256
@@ -79,10 +79,10 @@ Service has a json schema that use to validate against the Event json
     }
   },
   "required": [
-    "name",
+    "event",
     "payload"
   ],
-  "additionalProperties": false
+  "additionalProperties": true
 }
 </pre>
  
@@ -122,7 +122,7 @@ services.json
 [
   {
     "service": "ServiceSchema\\ServiceSamples\\CreateContact",
-    "schema": "\\jsons\\schemas\\CreateContact.json",
+    "schema": "/jsons/schemas/CreateContact.json",
     "callbacks": [
       "ServiceSchema\\ServiceSamples\\PushMessageToSqs",
       "ServiceSchema\\ServiceSamples\\PushMessageToLog"
@@ -130,14 +130,14 @@ services.json
   },
   {
     "service": "ServiceSchema\\ServiceSamples\\UpdateContact",
-    "schema": "\\jsons\\schemas\\UpdateContact.json",
+    "schema": "/jsons\\schemas/UpdateContact.json",
     "callbacks": [
       "ServiceSchema\\ServiceSamples\\PushMessageToLog"
     ]
   },
   {
     "service": "ServiceSchema\\ServiceSamples\\CreateTask",
-    "schema": "\\jsons\\schemas\\CreateTask.json"
+    "schema": "/jsons/schemas/CreateTask.json"
   }
 ]
 </pre>
@@ -152,7 +152,7 @@ CreateContact.json
 {
   "type": "object",
   "properties": {
-    "name": {
+    "event": {
       "type": "string",
       "minLength": 0,
       "maxLength": 256
@@ -204,10 +204,10 @@ CreateContact.json
     }
   },
   "required": [
-    "name",
+    "event",
     "payload"
   ],
-  "additionalProperties": false
+  "additionalProperties": true
 }
 </pre>
 
