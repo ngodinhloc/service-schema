@@ -19,7 +19,7 @@ class ServiceRegisterTest extends TestCase
     {
         parent::setUp();
         $this->testDir = dirname(dirname(__FILE__));
-        $this->serviceRegister = new ServiceRegister([$this->testDir . "\jsons\\configs\\services.json"]);
+        $this->serviceRegister = new ServiceRegister([$this->testDir . "/jsons/configs//services.json"]);
     }
 
     /**

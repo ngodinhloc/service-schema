@@ -31,8 +31,8 @@ class ProcessorTest extends TestCase
      */
     public function testProcess()
     {
-        $message = JsonReader::read($this->testDir . "\jsons\\messages\\Users.afterSaveCommit.Create.json");
-        $this->processor = new Processor([$this->testDir . "\jsons\\configs\\events.json"], [$this->testDir . "\jsons\\configs\services.json"], $this->testDir);
+        $message = JsonReader::read($this->testDir . "/jsons/messages/Users.afterSaveCommit.Create.json");
+        $this->processor = new Processor([$this->testDir . "/jsons/configs/events.json"], [$this->testDir . "/jsons/configs/services.json"], $this->testDir);
         $result = $this->processor->process($message);
         $this->assertTrue(is_bool($result));
     }
@@ -45,8 +45,8 @@ class ProcessorTest extends TestCase
      */
     public function testProcessFailed()
     {
-        $message = JsonReader::read($this->testDir . "\jsons\\messages\\Users.afterSaveCommit.Create.Failed.json");
-        $this->processor = new Processor([$this->testDir . "\jsons\\configs\\events.json"], [$this->testDir . "\jsons\\configs\services.json"], $this->testDir);
+        $message = JsonReader::read($this->testDir . "/jsons/messages/Users.afterSaveCommit.Create.Failed.json");
+        $this->processor = new Processor([$this->testDir . "/jsons/configs/events.json"], [$this->testDir . "/jsons/configs/services.json"], $this->testDir);
         $this->expectException(ServiceException::class);
         $this->processor->process($message);
     }

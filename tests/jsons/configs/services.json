@@ -1,7 +1,7 @@
 [
   {
     "service": "ServiceSchema\\ServiceSamples\\CreateContact",
-    "schema": "\\jsons\\schemas\\CreateContact.json",
+    "schema": "/jsons/schemas/CreateContact.json",
     "callbacks": [
       "ServiceSchema\\ServiceSamples\\PushMessageToSqs",
       "ServiceSchema\\ServiceSamples\\PushMessageToLog"
@@ -9,13 +9,13 @@
   },
   {
     "service": "ServiceSchema\\ServiceSamples\\UpdateContact",
-    "schema": "\\jsons\\schemas\\UpdateContact.json",
+    "schema": "/jsons/schemas/UpdateContact.json",
     "callbacks": [
       "ServiceSchema\\ServiceSamples\\PushMessageToLog"
     ]
   },
   {
     "service": "ServiceSchema\\ServiceSamples\\CreateTask",
-    "schema": "\\jsons\\schemas\\CreateTask.json"
+    "schema": "/jsons/schemas/CreateTask.json"
   }
 ]

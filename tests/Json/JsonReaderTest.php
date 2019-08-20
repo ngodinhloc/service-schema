@@ -49,7 +49,7 @@ class JsonReaderTest extends TestCase
      */
     public function testRead()
     {
-        $file = $this->testDir . "\jsons\messages\Users.afterSaveCommit.Create.json";
+        $file = $this->testDir . "/jsons/messages/Users.afterSaveCommit.Create.json";
         $json = JsonReader::read($file);
         $this->assertTrue(is_string($json));
     }
@@ -63,7 +63,7 @@ class JsonReaderTest extends TestCase
      */
     public function testDecode()
     {
-        $file = $this->testDir . "\jsons\messages\Users.afterSaveCommit.Create.json";
+        $file = $this->testDir . "/jsons/messages/Users.afterSaveCommit.Create.json";
         $json = JsonReader::read($file);
         $object = JsonReader::decode($json);
 
