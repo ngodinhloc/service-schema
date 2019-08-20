@@ -66,7 +66,6 @@ class JsonReaderTest extends TestCase
         $object = JsonReader::decode($json);
 
         $this->assertTrue(is_object($object));
-        $this->assertTrue(isset($object->name));
         $this->assertEquals("Users.afterSaveCommit.Create", $object->name);
         $this->assertEquals("20190726032212", $object->time);
         $this->assertTrue(isset($object->payload));
