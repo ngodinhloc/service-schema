@@ -30,7 +30,6 @@ class ServiceRegisterTest extends TestCase
     {
         $this->serviceRegister->loadServices();
         $services = $this->serviceRegister->getServices();
-        var_dump($services);
         $this->assertTrue(is_array($services));
         $this->assertTrue(isset($services["ServiceSchema\ServiceSamples\CreateContact"]));
         $this->assertTrue(isset($services["ServiceSchema\ServiceSamples\UpdateContact"]));
