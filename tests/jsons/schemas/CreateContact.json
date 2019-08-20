@@ -49,12 +49,12 @@
         "user",
         "account"
       ],
-      "additionalProperties": false
+      "additionalProperties": true
     }
   },
   "required": [
     "event",
     "payload"
   ],
-  "additionalProperties": false
+  "additionalProperties": true
 }
