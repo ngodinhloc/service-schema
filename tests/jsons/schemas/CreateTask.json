@@ -47,7 +47,7 @@
     }
   },
   "required": [
-    "name",
+    "event",
     "payload"
   ],
   "additionalProperties": false
