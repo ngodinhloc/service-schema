@@ -1,4 +1,7 @@
 # Service Schema
+[![Build Status](https://travis-ci.com/brighte-capital/service-schema.svg?branch=master)](https://travis-ci.com/brighte-capital/service-schema)
+[![codecov](https://codecov.io/gh/brighte-capital/service-schema/branch/master/graph/badge.svg)](https://codecov.io/gh/brighte-capital/service-schema)
+
 Using json schema to validate event messages and process services.
 
 Event is defined by json
