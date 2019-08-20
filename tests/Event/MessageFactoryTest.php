@@ -27,7 +27,7 @@ class MessageFactoryTest extends TestCase
     public function testCreateEvent()
     {
         $messageFactory = new MessageFactory();
-        $json = '{"name":"Test.Event.Name","time":"SomeTimeString","payload":{"name":"Ken"}}';
+        $json = '{"event":"Test.Event.Name","time":"SomeTimeString","payload":{"name":"Ken"}}';
         $message = $messageFactory->createMessage($json);
         $this->assertTrue($message instanceof Message);
         $this->assertEquals("Test.Event.Name", $message->getEvent());

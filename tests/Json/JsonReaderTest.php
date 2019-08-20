@@ -42,7 +42,6 @@ class JsonReaderTest extends TestCase
     }
 
     /**
-     * @covers \ServiceSchema\Json\JsonReader::setFile
      * @covers \ServiceSchema\Json\JsonReader::read
      * @covers \ServiceSchema\Json\JsonReader::getContent
      * @throws \ServiceSchema\Json\Exception\JsonException
@@ -55,7 +54,6 @@ class JsonReaderTest extends TestCase
     }
 
     /**
-     * @covers \ServiceSchema\Json\JsonReader::setFile
      * @covers \ServiceSchema\Json\JsonReader::read
      * @covers \ServiceSchema\Json\JsonReader::getContent
      * @covers \ServiceSchema\Json\JsonReader::decode
@@ -70,7 +68,6 @@ class JsonReaderTest extends TestCase
         $this->assertTrue(is_object($object));
         $this->assertTrue(isset($object->name));
         $this->assertEquals("Users.afterSaveCommit.Create", $object->name);
-        $this->assertTrue(isset($object->time));
         $this->assertEquals("20190726032212", $object->time);
         $this->assertTrue(isset($object->payload));
         $this->assertTrue(isset($object->payload->user->data->name));
