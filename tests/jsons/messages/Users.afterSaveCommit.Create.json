@@ -4,7 +4,9 @@
   "status": "New",
   "payload": {
     "user": {
-      "data": {}
+      "data": {
+        "name" : "Ken"
+      }
     },
     "account": {
       "data": {
