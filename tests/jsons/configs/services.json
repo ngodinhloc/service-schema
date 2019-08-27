@@ -4,7 +4,7 @@
     "schema": "/jsons/schemas/CreateContact.json",
     "callbacks": [
       "ServiceSchema\\Tests\\Service\\Samples\\PushMessageToSqs",
-      "ServiceSchema\\ServiceSamples\\PushMessageToLog"
+      "ServiceSchema\\Tests\\Service\\Samples\\PushMessageToLog"
     ]
   },
   {
