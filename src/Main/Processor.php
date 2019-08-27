@@ -60,7 +60,7 @@ class Processor implements ProcessorInterface
 
     /**
      * @param string|null $json
-     * @param bool $return
+     * @param bool $return return first service result
      * @return bool
      * @throws \ServiceSchema\Json\Exception\JsonException
      * @throws \ServiceSchema\Service\Exception\ServiceException
