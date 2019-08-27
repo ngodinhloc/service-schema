@@ -7,11 +7,13 @@ use ServiceSchema\Service\ServiceInterface;
 
 interface ProcessorInterface
 {
+
     /**
      * @param string|null $json
+     * @param bool $return
      * @return mixed
      */
-    public function process(string $json = null);
+    public function process(string $json = null, bool $return = false);
 
     /**
      * @param \ServiceSchema\Event\MessageInterface|null $message

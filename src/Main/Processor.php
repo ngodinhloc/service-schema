@@ -15,6 +15,7 @@ use ServiceSchema\Service\ServiceValidator;
 
 class Processor implements ProcessorInterface
 {
+
     /** @var \ServiceSchema\Config\EventRegister */
     protected $eventRegister;
 
@@ -59,12 +60,13 @@ class Processor implements ProcessorInterface
 
     /**
      * @param string|null $json
+     * @param bool $return
      * @return bool
      * @throws \ServiceSchema\Json\Exception\JsonException
      * @throws \ServiceSchema\Service\Exception\ServiceException
      * @throws \ServiceSchema\Main\Exception\ProcessorException
      */
-    public function process(string $json = null)
+    public function process(string $json = null, bool $return = false)
     {
         $message = $this->messageFactory->createMessage($json);
         if (empty($message)) {
@@ -92,6 +94,10 @@ class Processor implements ProcessorInterface
                 $service = $this->serviceFactory->createService($serviceName, $jsonSchema);
                 if (empty($service)) {
                     continue;
+                }
+
+                if ($return === true) {
+                    return $this->runService($message, $service, $callbacks);
                 }
 
                 $this->runService($message, $service, $callbacks);
