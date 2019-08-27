@@ -100,14 +100,14 @@ events.json
   {
     "event": "Users.afterSaveCommit.Create",
     "services": [
-      "ServiceSchema\\ServiceSamples\\CreateContact",
-      "ServiceSchema\\ServiceSamples\\CreateTask"
+      "ServiceSchema\\Tests\\Service\\Samples\\CreateContact",
+      "ServiceSchema\\Tests\\Service\\Samples\\CreateTask"
     ]
   },
   {
     "event": "Users.afterSaveCommit.Update",
     "services": [
-      "ServiceSchema\\ServiceSamples\\UpdateContact"
+      "ServiceSchema\\Tests\\Service\\Samples\\UpdateContact"
     ]
   }
 ]
@@ -121,29 +121,29 @@ services.json
 <pre>
 [
   {
-    "service": "ServiceSchema\\ServiceSamples\\CreateContact",
+    "service": "ServiceSchema\\Tests\\Service\\Samples\\CreateContact",
     "schema": "/jsons/schemas/CreateContact.json",
     "callbacks": [
-      "ServiceSchema\\ServiceSamples\\PushMessageToSqs",
-      "ServiceSchema\\ServiceSamples\\PushMessageToLog"
+      "ServiceSchema\\Tests\\Service\\Samples\\PushMessageToSqs",
+      "ServiceSchema\\Tests\\Service\\Samples\\PushMessageToLog"
     ]
   },
   {
-    "service": "ServiceSchema\\ServiceSamples\\UpdateContact",
-    "schema": "/jsons\\schemas/UpdateContact.json",
+    "service": "ServiceSchema\\Tests\\Service\\Samples\\UpdateContact",
+    "schema": "/jsons/schemas/UpdateContact.json",
     "callbacks": [
-      "ServiceSchema\\ServiceSamples\\PushMessageToLog"
+      "ServiceSchema\\Tests\\Service\\Samples\\PushMessageToLog"
     ]
   },
   {
-    "service": "ServiceSchema\\ServiceSamples\\CreateTask",
+    "service": "ServiceSchema\\Tests\\Service\\Samples\\CreateTask",
     "schema": "/jsons/schemas/CreateTask.json"
   }
 ]
 </pre>
 
 In this services.json:
-- There are 03 services:  "ServiceSchema\\ServiceSamples\\CreateContact", "ServiceSchema\\ServiceSamples\\UpdateContact", "ServiceSchema\\ServiceSamples\\CreateTask",
+- There are 03 services:  "ServiceSchema\\Tests\\Service\\Samples\\CreateContact", "ServiceSchema\\Tests\\Service\\Samples\\UpdateContact", "ServiceSchema\\Tests\\Service\\Samples\\CreateTask",
 - Each service has a schema and a list of callback services
 
 ### services schema
@@ -230,7 +230,7 @@ $message = $event->toJson();
 
 ### Service
 <pre>
-namespace ServiceSchema\ServiceSamples;
+namespace ServiceSchema\Tests\Service\Samples;
 
 use ServiceSchema\Event\Message;
 use ServiceSchema\Event\MessageInterface;
@@ -259,10 +259,10 @@ $processor = new Processor(["events.json"], ["services.json"], "serviceSchemaDir
 $result = $processor->process($message);
 /*
  * In this example, event "Users.afterSaveCommit.Create" has 02 services listening to it (configued in events.json)
- * "ServiceSchema\\ServiceSamples\\CreateContact", "ServiceSchema\\ServiceSamples\\CreateTask"
+ * "ServiceSchema\\Tests\\Service\\Samples\\CreateContact", "ServiceSchema\\Tests\\Service\\Samples\\CreateTask"
  * When $processor->process(message): CreateContact->run(Event) and CreateTask->run(Event) will be executed.
  * Service CreateContact has 02 callback services (configured in services.json): 
- * "ServiceSchema\\ServiceSamples\\PushMessageToSqs","ServiceSchema\\ServiceSamples\\PushMessageToLog"
+ * "ServiceSchema\\Tests\\Service\\Samples\\PushMessageToSqs","ServiceSchema\\Tests\\Service\\Samples\\PushMessageToLog"
  * When CreateContact->run(Event) returns an Event then PushMessageToSqs->run(Event) and PushMessageToLog->run(Event) will be executed
  */
 </pre>
