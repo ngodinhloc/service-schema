@@ -26,7 +26,7 @@ class ServiceFactoryTest extends TestCase
      */
     public function testCreateService()
     {
-        $serviceClass = "\ServiceSchema\ServiceSamples\CreateContact";
+        $serviceClass = "\ServiceSchema\Tests\Service\Samples\CreateContact";
         $schema = $this->testDir . "/jsons/schemas/CreateContact.json";
         $service = $this->serviceFactory->createService($serviceClass, $schema);
         $this->assertTrue($service instanceof ServiceInterface);

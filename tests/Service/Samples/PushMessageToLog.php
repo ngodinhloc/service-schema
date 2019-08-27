@@ -1,18 +1,17 @@
 <?php
 
-namespace ServiceSchema\ServiceSamples;
+namespace ServiceSchema\Tests\Service\Samples;
 
-use ServiceSchema\Event\Message;
 use ServiceSchema\Event\MessageInterface;
 use ServiceSchema\Service\Service;
 use ServiceSchema\Service\ServiceInterface;
 
-class CreateContact extends Service implements ServiceInterface
+class PushMessageToLog extends Service implements ServiceInterface
 {
     public function consume(MessageInterface $message = null)
     {
-        echo "CreateContact";
+        echo "Push message to Log";
 
-        return new Message();
+        return true;
     }
 }

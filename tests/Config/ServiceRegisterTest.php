@@ -31,8 +31,8 @@ class ServiceRegisterTest extends TestCase
         $this->serviceRegister->loadServices();
         $services = $this->serviceRegister->getServices();
         $this->assertTrue(is_array($services));
-        $this->assertTrue(isset($services["ServiceSchema\ServiceSamples\CreateContact"]));
-        $this->assertTrue(isset($services["ServiceSchema\ServiceSamples\UpdateContact"]));
+        $this->assertTrue(isset($services["ServiceSchema\Tests\Service\Samples\CreateContact"]));
+        $this->assertTrue(isset($services["ServiceSchema\Tests\Service\Samples\UpdateContact"]));
     }
 
     /**

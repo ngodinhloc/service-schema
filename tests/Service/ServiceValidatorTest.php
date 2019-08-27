@@ -5,7 +5,7 @@ namespace ServiceSchema\Tests\Service;
 use PHPUnit\Framework\TestCase;
 use ServiceSchema\Json\JsonReader;
 use ServiceSchema\Service\ServiceValidator;
-use ServiceSchema\ServiceSamples\CreateContact;
+use ServiceSchema\Tests\Service\Samples\CreateContact;
 
 class ServiceValidatorTest extends TestCase
 {
