@@ -267,7 +267,8 @@ $result = $processor->process($message);
  */
 </pre>
 
-Please refer tests to see the sample configs of events, services, schema and usage of Processor
+### Tests
+Please refer to tests for sample configs of events, services, schema and usage of Processor
 - tests/jsons/configs/events.json: configuration of events
 - tests/jsons/config/services.json: configuration of services
 - tests/jsons/configs/schemas/: sample services schemas (CreateContact.json, CreateTask.json, UpdateContact.json)
