@@ -266,3 +266,9 @@ $result = $processor->process($message);
  * When CreateContact->run(Event) returns an Event then PushMessageToSqs->run(Event) and PushMessageToLog->run(Event) will be executed
  */
 </pre>
+
+Please refer tests to see the sample configs of events, services, schema and usage of Processor
+- tests/jsons/configs/events.json: configuration of events
+- tests/jsons/config/services.json: configuration of services
+- tests/jsons/configs/schemas/: sample services schemas (CreateContact.json, CreateTask.json, UpdateContact.json)
+- tests/Main/ProcessorTest.php: how to config and run the Processor
