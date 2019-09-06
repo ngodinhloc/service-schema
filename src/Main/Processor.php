@@ -97,7 +97,7 @@ class Processor implements ProcessorInterface
                 }
 
                 if ($return === true) {
-                    return $this->runService($message, $service, $callbacks);
+                    return $this->runService($message, $service, $callbacks, $return);
                 }
 
                 $this->runService($message, $service, $callbacks);
@@ -111,11 +111,12 @@ class Processor implements ProcessorInterface
      * @param \ServiceSchema\Event\MessageInterface|null $message
      * @param \ServiceSchema\Service\ServiceInterface|null $service
      * @param array $callbacks
+     * @param bool $return
      * @return bool
      * @throws \ServiceSchema\Json\Exception\JsonException
      * @throws \ServiceSchema\Service\Exception\ServiceException
      */
-    public function runService(MessageInterface $message = null, ServiceInterface $service = null, array $callbacks = null)
+    public function runService(MessageInterface $message = null, ServiceInterface $service = null, array $callbacks = null, bool $return = false)
     {
         $json = JsonReader::decode($message->toJson());
         $validator = $this->serviceValidator->validate($json, $service);
@@ -128,6 +129,10 @@ class Processor implements ProcessorInterface
         }
 
         $result = $service->consume($message);
+        if ($return === true) {
+            return $result;
+        }
+
         if (($result instanceof MessageInterface) && !empty($callbacks)) {
             return $this->runCallbacks($result, $callbacks);
         }
