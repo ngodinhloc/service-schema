@@ -7,6 +7,7 @@ use ServiceSchema\Json\JsonReader;
 
 class MessageFactory
 {
+
     /**
      * @param string|null $json
      * @return false|\ServiceSchema\Event\Message
@@ -28,7 +29,9 @@ class MessageFactory
             isset($object->event) ? $object->event : null,
             isset($object->time) ? $object->time : null,
             isset($object->payload) ? $object->payload : null,
-            isset($object->status) ? $object->status : Message::STATUS_NEW
+            isset($object->status) ? $object->status : Message::STATUS_NEW,
+            isset($object->queue) ? $object->queue : null,
+            isset($object->jwt) ? $object->jwt : null,
         );
     }
 

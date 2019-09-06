@@ -6,6 +6,7 @@ use ServiceSchema\Json\JsonReader;
 
 class Message implements MessageInterface
 {
+
     /** @var string */
     protected $event;
 
@@ -32,23 +33,28 @@ class Message implements MessageInterface
      * Event constructor.
      *
      * @param string|null $event
-     * @param array|null|\stdClass $payload
      * @param string|null $time
+     * @param string|null $queue
+     * @param string|null $jwt
+     * @param array|null|\stdClass $payload
      * @param string|null $status
      */
-    public function __construct(string $event = null, string $time = null, $payload = null, string $status = self::STATUS_NEW)
+    public function __construct(string $event = null, string $time = null, $payload = null, string $status = self::STATUS_NEW, string $queue = null, string $jwt = null)
     {
         $this->event = $event;
         $this->time = $time ? $time : date("YmdHis");
         $this->payload = $payload;
         $this->status = $status;
+        $this->queue = $queue;
+        $this->jwt = $jwt;
     }
 
     /**
      * @return false|string
      * @throws \ServiceSchema\Json\Exception\JsonException
      */
-    public function toJson()
+    public
+    function toJson()
     {
         return JsonReader::encode(["event" => $this->event, "time" => $this->time, "payload" => $this->payload, "status" => $this->status]);
     }
@@ -56,7 +62,8 @@ class Message implements MessageInterface
     /**
      * @return string
      */
-    public function getEvent(): string
+    public
+    function getEvent(): string
     {
         return $this->event;
     }
@@ -65,7 +72,8 @@ class Message implements MessageInterface
      * @param string $event
      * @return \ServiceSchema\Event\Message
      */
-    public function setEvent(string $event = null)
+    public
+    function setEvent(string $event = null)
     {
         $this->event = $event;
 
@@ -75,7 +83,8 @@ class Message implements MessageInterface
     /**
      * @return string
      */
-    public function getTime()
+    public
+    function getTime()
     {
         return $this->time;
     }
@@ -84,7 +93,8 @@ class Message implements MessageInterface
      * @param string $time
      * @return \ServiceSchema\Event\Message
      */
-    public function setTime(string $time = null)
+    public
+    function setTime(string $time = null)
     {
         $this->time = $time;
 
@@ -94,7 +104,8 @@ class Message implements MessageInterface
     /**
      * @return string
      */
-    public function getQueue()
+    public
+    function getQueue()
     {
         return $this->queue;
     }
@@ -103,7 +114,8 @@ class Message implements MessageInterface
      * @param string $queue
      * @return \ServiceSchema\Event\Message
      */
-    public function setQueue(string $queue = null)
+    public
+    function setQueue(string $queue = null)
     {
         $this->queue = $queue;
 
@@ -113,7 +125,8 @@ class Message implements MessageInterface
     /**
      * @return string
      */
-    public function getJwt()
+    public
+    function getJwt()
     {
         return $this->jwt;
     }
@@ -122,18 +135,19 @@ class Message implements MessageInterface
      * @param string $jwt
      * @return \ServiceSchema\Event\Message
      */
-    public function setJwt(string $jwt = null)
+    public
+    function setJwt(string $jwt = null)
     {
         $this->jwt = $jwt;
 
         return $this;
     }
 
-
     /**
      * @return array|null|\stdClass
      */
-    public function getPayload()
+    public
+    function getPayload()
     {
         return $this->payload;
     }
@@ -142,7 +156,8 @@ class Message implements MessageInterface
      * @param array|\stdClass $payload
      * @return \ServiceSchema\Event\Message
      */
-    public function setPayload($payload = null)
+    public
+    function setPayload($payload = null)
     {
         $this->payload = $payload;
 
@@ -152,7 +167,8 @@ class Message implements MessageInterface
     /**
      * @return string
      */
-    public function getStatus()
+    public
+    function getStatus()
     {
         return $this->status;
     }
@@ -161,7 +177,8 @@ class Message implements MessageInterface
      * @param string $status
      * @return \ServiceSchema\Event\Message
      */
-    public function setStatus(string $status = null)
+    public
+    function setStatus(string $status = null)
     {
         $this->status = $status;
 
