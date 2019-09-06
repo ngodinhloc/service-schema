@@ -2,9 +2,9 @@
 
 namespace ServiceSchema\Event;
 
-
 interface MessageInterface
 {
+
     /**
      * @return false|string
      */
@@ -27,10 +27,10 @@ interface MessageInterface
     public function setTime(string $time = null);
 
     /**
-     * @param string $name
+     * @param string $event
      * @return \ServiceSchema\Event\Message
      */
-    public function setEvent(string $name = null);
+    public function setEvent(string $event = null);
 
     /**
      * @return array|null|\stdClass
@@ -53,4 +53,21 @@ interface MessageInterface
      * @return \ServiceSchema\Event\Message
      */
     public function setStatus(string $status = null);
+
+    /**
+     * @return string
+     */
+    public function getQueue();
+
+    /**
+     * @param string $queue
+     * @return \ServiceSchema\Event\Message
+     */
+    public function setQueue(string $queue = null);
+
+    /**
+     * @param string $jwt
+     * @return \ServiceSchema\Event\Message
+     */
+    public function setJwt(string $jwt = null);
 }

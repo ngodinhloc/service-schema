@@ -12,6 +12,12 @@ class Message implements MessageInterface
     /** @var string */
     protected $time;
 
+    /** @var string */
+    protected $queue;
+
+    /** @var string */
+    protected $jwt;
+
     /** @var array|null|\stdClass */
     protected $payload;
 
@@ -84,6 +90,45 @@ class Message implements MessageInterface
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getQueue()
+    {
+        return $this->queue;
+    }
+
+    /**
+     * @param string $queue
+     * @return \ServiceSchema\Event\Message
+     */
+    public function setQueue(string $queue = null)
+    {
+        $this->queue = $queue;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getJwt()
+    {
+        return $this->jwt;
+    }
+
+    /**
+     * @param string $jwt
+     * @return \ServiceSchema\Event\Message
+     */
+    public function setJwt(string $jwt = null)
+    {
+        $this->jwt = $jwt;
+
+        return $this;
+    }
+
 
     /**
      * @return array|null|\stdClass
