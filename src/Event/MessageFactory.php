@@ -31,7 +31,7 @@ class MessageFactory
             isset($object->payload) ? $object->payload : null,
             isset($object->status) ? $object->status : Message::STATUS_NEW,
             isset($object->queue) ? $object->queue : null,
-            isset($object->jwt) ? $object->jwt : null,
+            isset($object->jwt) ? $object->jwt : null
         );
     }
 
