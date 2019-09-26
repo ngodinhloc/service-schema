@@ -2,7 +2,6 @@
 
 namespace ServiceSchema\Service;
 
-
 use JsonSchema\Constraints\Constraint;
 use JsonSchema\Validator;
 use ServiceSchema\Json\JsonReader;
@@ -10,6 +9,7 @@ use ServiceSchema\Service\Exception\ServiceException;
 
 class ServiceValidator
 {
+
     /** @var \JsonSchema\Validator */
     protected $validator;
 
@@ -49,5 +49,43 @@ class ServiceValidator
         $this->validator->validate($jsonObject, $schema, Constraint::CHECK_MODE_APPLY_DEFAULTS);
 
         return $this->validator;
+    }
+
+    /**
+     * @return \JsonSchema\Validator
+     */
+    public function getValidator(): Validator
+    {
+        return $this->validator;
+    }
+
+    /**
+     * @param \JsonSchema\Validator $validator
+     * @return \ServiceSchema\Service\ServiceValidator
+     */
+    public function setValidator(Validator $validator = null): ServiceValidator
+    {
+        $this->validator = $validator;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSchemaDir(): string
+    {
+        return $this->schemaDir;
+    }
+
+    /**
+     * @param string $schemaDir
+     * @return \ServiceSchema\Service\ServiceValidator
+     */
+    public function setSchemaDir(?string $schemaDir = null): ServiceValidator
+    {
+        $this->schemaDir = $schemaDir;
+
+        return $this;
     }
 }
