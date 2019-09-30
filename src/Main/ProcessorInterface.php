@@ -10,10 +10,11 @@ interface ProcessorInterface
 
     /**
      * @param string|null $json
+     * @param array|null $filteredEvents
      * @param bool $return
      * @return mixed
      */
-    public function process(string $json = null, bool $return = false);
+    public function process(string $json = null, array $filteredEvents = null, bool $return = false);
 
     /**
      * @param \ServiceSchema\Event\MessageInterface|null $message

@@ -14,9 +14,6 @@ class ProcessorTest extends TestCase
     /** @var Processor */
     protected $processor;
 
-    /**
-     * @throws \ServiceSchema\Json\Exception\JsonException
-     */
     public function setUp()
     {
         parent::setUp();
@@ -24,9 +21,8 @@ class ProcessorTest extends TestCase
     }
 
     /**
-     * @covers \ServiceSchema\Main\Processor::process
-     * @covers \ServiceSchema\Main\Processor::runService
      * @throws \ServiceSchema\Json\Exception\JsonException
+     * @throws \ServiceSchema\Main\Exception\ProcessorException
      * @throws \ServiceSchema\Service\Exception\ServiceException
      */
     public function testProcess()
@@ -38,9 +34,8 @@ class ProcessorTest extends TestCase
     }
 
     /**
-     * @covers \ServiceSchema\Main\Processor::process
-     * @covers \ServiceSchema\Main\Processor::runService
      * @throws \ServiceSchema\Json\Exception\JsonException
+     * @throws \ServiceSchema\Main\Exception\ProcessorException
      * @throws \ServiceSchema\Service\Exception\ServiceException
      */
     public function testProcessFailed()

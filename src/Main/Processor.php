@@ -61,16 +61,21 @@ class Processor implements ProcessorInterface
     /**
      * @param string|null $json
      * @param bool $return return first service result
+     * @param array|null $filteredEvents
      * @return bool
      * @throws \ServiceSchema\Json\Exception\JsonException
      * @throws \ServiceSchema\Service\Exception\ServiceException
      * @throws \ServiceSchema\Main\Exception\ProcessorException
      */
-    public function process(string $json = null, bool $return = false)
+    public function process(string $json = null, array $filteredEvents = null, bool $return = false)
     {
         $message = $this->messageFactory->createMessage($json);
         if (empty($message)) {
             throw new ProcessorException(ProcessorException::FAILED_TO_CREATE_MESSAGE . $json);
+        }
+
+        if (count($filteredEvents) > 0 && !in_array($message->getEvent(), $filteredEvents)) {
+            throw new ProcessorException(ProcessorException::FILTERED_EVENT_ONLY . $json);
         }
 
         $registeredEvents = $this->eventRegister->retrieveEvent($message->getEvent());
