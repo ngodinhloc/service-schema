@@ -4,6 +4,7 @@ namespace ServiceSchema\Main;
 
 use ServiceSchema\Config\EventRegister;
 use ServiceSchema\Config\ServiceRegister;
+use ServiceSchema\Event\Message;
 use ServiceSchema\Event\MessageFactory;
 use ServiceSchema\Event\MessageInterface;
 use ServiceSchema\Json\JsonReader;
@@ -59,7 +60,7 @@ class Processor implements ProcessorInterface
     }
 
     /**
-     * @param string|null $json
+     * @param string|\ServiceSchema\Event\Message $json
      * @param bool $return return first service result
      * @param array|null $filteredEvents
      * @return bool
@@ -69,9 +70,13 @@ class Processor implements ProcessorInterface
      */
     public function process(string $json = null, array $filteredEvents = null, bool $return = false)
     {
-        $message = $this->messageFactory->createMessage($json);
-        if (empty($message)) {
-            throw new ProcessorException(ProcessorException::FAILED_TO_CREATE_MESSAGE . $json);
+        if (!$json instanceof Message) {
+            $message = $this->messageFactory->createMessage($json);
+            if (empty($message)) {
+                throw new ProcessorException(ProcessorException::FAILED_TO_CREATE_MESSAGE . $json);
+            }
+        } else {
+            $message = $json;
         }
 
         if (count($filteredEvents) > 0 && !in_array($message->getEvent(), $filteredEvents)) {
