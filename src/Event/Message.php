@@ -8,6 +8,9 @@ class Message implements MessageInterface
 {
 
     /** @var string */
+    protected $id;
+
+    /** @var string */
     protected $event;
 
     /** @var string */
@@ -53,17 +56,42 @@ class Message implements MessageInterface
      * @return false|string
      * @throws \ServiceSchema\Json\Exception\JsonException
      */
-    public
-    function toJson()
+    public function toJson()
     {
-        return JsonReader::encode(["event" => $this->event, "time" => $this->time, "payload" => $this->payload, "status" => $this->status]);
+        return JsonReader::encode([
+            "id" => $this->id,
+            "event" => $this->event,
+            "time" => $this->time,
+            "payload" => $this->payload,
+            "status" => $this->status,
+            "queue" => $this->queue,
+            "jwt" => $this->jwt
+        ]);
     }
 
     /**
      * @return string
      */
-    public
-    function getEvent(): string
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param string $id
+     * @return Message
+     */
+    public function setId(string $id): Message
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEvent(): string
     {
         return $this->event;
     }
@@ -72,8 +100,7 @@ class Message implements MessageInterface
      * @param string $event
      * @return \ServiceSchema\Event\Message
      */
-    public
-    function setEvent(string $event = null)
+    public function setEvent(string $event = null)
     {
         $this->event = $event;
 
@@ -83,8 +110,7 @@ class Message implements MessageInterface
     /**
      * @return string
      */
-    public
-    function getTime()
+    public function getTime()
     {
         return $this->time;
     }
@@ -93,8 +119,7 @@ class Message implements MessageInterface
      * @param string $time
      * @return \ServiceSchema\Event\Message
      */
-    public
-    function setTime(string $time = null)
+    public function setTime(string $time = null)
     {
         $this->time = $time;
 
@@ -104,8 +129,7 @@ class Message implements MessageInterface
     /**
      * @return string
      */
-    public
-    function getQueue()
+    public function getQueue()
     {
         return $this->queue;
     }
@@ -114,8 +138,7 @@ class Message implements MessageInterface
      * @param string $queue
      * @return \ServiceSchema\Event\Message
      */
-    public
-    function setQueue(string $queue = null)
+    public function setQueue(string $queue = null)
     {
         $this->queue = $queue;
 
@@ -125,8 +148,7 @@ class Message implements MessageInterface
     /**
      * @return string
      */
-    public
-    function getJwt()
+    public function getJwt()
     {
         return $this->jwt;
     }
@@ -135,8 +157,7 @@ class Message implements MessageInterface
      * @param string $jwt
      * @return \ServiceSchema\Event\Message
      */
-    public
-    function setJwt(string $jwt = null)
+    public function setJwt(string $jwt = null)
     {
         $this->jwt = $jwt;
 
@@ -146,8 +167,7 @@ class Message implements MessageInterface
     /**
      * @return array|null|\stdClass
      */
-    public
-    function getPayload()
+    public function getPayload()
     {
         return $this->payload;
     }
@@ -156,8 +176,7 @@ class Message implements MessageInterface
      * @param array|\stdClass $payload
      * @return \ServiceSchema\Event\Message
      */
-    public
-    function setPayload($payload = null)
+    public function setPayload($payload = null)
     {
         $this->payload = $payload;
 
@@ -167,8 +186,7 @@ class Message implements MessageInterface
     /**
      * @return string
      */
-    public
-    function getStatus()
+    public function getStatus()
     {
         return $this->status;
     }
@@ -177,8 +195,7 @@ class Message implements MessageInterface
      * @param string $status
      * @return \ServiceSchema\Event\Message
      */
-    public
-    function setStatus(string $status = null)
+    public function setStatus(string $status = null)
     {
         $this->status = $status;
 

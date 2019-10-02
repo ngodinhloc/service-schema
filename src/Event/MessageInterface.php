@@ -13,6 +13,17 @@ interface MessageInterface
     /**
      * @return string
      */
+    public function getId(): string;
+
+    /**
+     * @param string $id
+     * @return Message
+     */
+    public function setId(string $id): Message;
+
+    /**
+     * @return string
+     */
     public function getEvent();
 
     /**
