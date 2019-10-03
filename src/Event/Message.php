@@ -79,9 +79,9 @@ class Message implements MessageInterface
 
     /**
      * @param string $id
-     * @return Message
+     * @return \ServiceSchema\Event\Message
      */
-    public function setId(string $id): Message
+    public function setId(string $id = null): Message
     {
         $this->id = $id;
 
