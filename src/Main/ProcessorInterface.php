@@ -9,12 +9,15 @@ interface ProcessorInterface
 {
 
     /**
-     * @param string|null $json
+     * @param string|\ServiceSchema\Event\Message $json
+     * @param bool $return return first service result
      * @param array|null $filteredEvents
-     * @param bool $return
-     * @return mixed
+     * @return bool
+     * @throws \ServiceSchema\Json\Exception\JsonException
+     * @throws \ServiceSchema\Service\Exception\ServiceException
+     * @throws \ServiceSchema\Main\Exception\ProcessorException
      */
-    public function process(string $json = null, array $filteredEvents = null, bool $return = false);
+    public function process($json = null, array $filteredEvents = null, bool $return = false);
 
     /**
      * @param \ServiceSchema\Event\MessageInterface|null $message

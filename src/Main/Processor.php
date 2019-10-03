@@ -68,7 +68,7 @@ class Processor implements ProcessorInterface
      * @throws \ServiceSchema\Service\Exception\ServiceException
      * @throws \ServiceSchema\Main\Exception\ProcessorException
      */
-    public function process(string $json = null, array $filteredEvents = null, bool $return = false)
+    public function process($json = null, array $filteredEvents = null, bool $return = false)
     {
         if (!$json instanceof Message) {
             $message = $this->messageFactory->createMessage($json);
