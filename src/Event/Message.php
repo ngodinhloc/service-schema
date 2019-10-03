@@ -45,7 +45,7 @@ class Message implements MessageInterface
     public function __construct(string $event = null, string $time = null, $payload = null, string $status = self::STATUS_NEW, string $queue = null, string $jwt = null)
     {
         $this->event = $event;
-        $this->time = $time ? $time : date("YmdHis");
+        $this->time = $time ? $time : date("Y-m-d H:i;s");
         $this->payload = $payload;
         $this->status = $status;
         $this->queue = $queue;
