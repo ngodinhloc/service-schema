@@ -31,7 +31,7 @@ class MessageTest extends TestCase
         $event->setStatus("new");
         $json = $event->toJson();
         $this->assertTrue(is_string($json));
-        $this->assertEquals('{"event":"Test.Event.Name","time":"SomeTimeString","payload":{"name":"Ken"},"status":"new"}', $json);
+        $this->assertEquals('{"id":null,"event":"Test.Event.Name","time":"SomeTimeString","payload":{"name":"Ken"},"status":"new","direction":null,"description":null,"source":null,"extra":null}', $json);
 
         $event = new Message();
         $event->setEvent("Users.afterSaveCommit.Create");
