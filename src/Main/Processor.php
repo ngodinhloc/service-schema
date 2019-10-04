@@ -79,7 +79,7 @@ class Processor implements ProcessorInterface
             $message = $json;
         }
 
-        if (count($filteredEvents) > 0 && !in_array($message->getEvent(), $filteredEvents)) {
+        if (!empty($filteredEvents) && !in_array($message->getEvent(), $filteredEvents)) {
             throw new ProcessorException(ProcessorException::FILTERED_EVENT_ONLY . $json);
         }
 
