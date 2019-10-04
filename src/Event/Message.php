@@ -169,7 +169,7 @@ class Message implements MessageInterface
     /**
      * @return string|null
      */
-    public function getDirection(): string
+    public function getDirection()
     {
         return $this->direction;
     }
@@ -207,7 +207,7 @@ class Message implements MessageInterface
     /**
      * @return string|null
      */
-    public function getSource(): string
+    public function getSource()
     {
         return $this->source;
     }
