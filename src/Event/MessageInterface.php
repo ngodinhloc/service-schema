@@ -11,95 +11,95 @@ interface MessageInterface
     public function toJson();
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getId(): string;
+    public function getId();
 
     /**
-     * @param string $id
-     * @return Message
+     * @param string|null $id
+     * @return \ServiceSchema\Event\Message
      */
-    public function setId(string $id): Message;
+    public function setId(string $id = null);
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getEvent();
 
     /**
-     * @param string $event
+     * @param string|null $event
      * @return \ServiceSchema\Event\Message
      */
     public function setEvent(string $event = null);
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getTime();
 
     /**
-     * @param string $time
+     * @param string|null $time
      * @return \ServiceSchema\Event\Message
      */
     public function setTime(string $time = null);
 
     /**
-     * @return array|null|\stdClass
+     * @return array|\stdClass|null
      */
     public function getPayload();
 
     /**
-     * @param array|\stdClass $payload
+     * @param array|\stdClass|null $payload
      * @return \ServiceSchema\Event\Message
      */
     public function setPayload($payload = null);
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getStatus();
 
     /**
-     * @param string $status
+     * @param string|null $status
      * @return \ServiceSchema\Event\Message
      */
     public function setStatus(string $status = null);
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDirection(): string;
+    public function getDirection();
 
     /**
-     * @param string $direction
+     * @param string|null $direction
      * @return \ServiceSchema\Event\Message
      */
-    public function setDirection(string $direction = null): Message;
+    public function setDirection(string $direction = null);
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription(): string;
+    public function getDescription();
 
     /**
-     * @param string $description
+     * @param string|null $description
      * @return \ServiceSchema\Event\Message
      */
-    public function setDescription(string $description = null): Message;
+    public function setDescription(string $description = null);
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSource(): string;
+    public function getSource();
 
     /**
-     * @param string $source
+     * @param string|null $source
      * @return \ServiceSchema\Event\Message
      */
-    public function setSource(string $source = null): Message;
+    public function setSource(string $source = null);
 
     /**
-     * @return string
+     * @return array|\stdClass|null
      */
     public function getExtra();
 
@@ -107,6 +107,6 @@ interface MessageInterface
      * @param array|\stdClass|null $extra
      * @return \ServiceSchema\Event\Message
      */
-    public function setExtra($extra = null): Message;
+    public function setExtra($extra = null);
 
 }

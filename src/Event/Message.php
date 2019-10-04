@@ -72,18 +72,18 @@ class Message implements MessageInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getId(): string
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param string $id
+     * @param string|null $id
      * @return \ServiceSchema\Event\Message
      */
-    public function setId(string $id = null): Message
+    public function setId(string $id = null)
     {
         $this->id = $id;
 
@@ -91,18 +91,18 @@ class Message implements MessageInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEvent(): string
+    public function getEvent()
     {
         return $this->event;
     }
 
     /**
-     * @param string $event
+     * @param string|null $event
      * @return \ServiceSchema\Event\Message
      */
-    public function setEvent(string $event = null): Message
+    public function setEvent(string $event = null)
     {
         $this->event = $event;
 
@@ -110,18 +110,18 @@ class Message implements MessageInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTime(): string
+    public function getTime()
     {
         return $this->time;
     }
 
     /**
-     * @param string $time
+     * @param string|null $time
      * @return \ServiceSchema\Event\Message
      */
-    public function setTime(string $time = null): Message
+    public function setTime(string $time = null)
     {
         $this->time = $time;
 
@@ -148,18 +148,18 @@ class Message implements MessageInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStatus(): string
+    public function getStatus()
     {
         return $this->status;
     }
 
     /**
-     * @param string $status
+     * @param string|null $status
      * @return \ServiceSchema\Event\Message
      */
-    public function setStatus(string $status = null): Message
+    public function setStatus(string $status = null)
     {
         $this->status = $status;
 
@@ -167,7 +167,7 @@ class Message implements MessageInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getDirection(): string
     {
@@ -175,10 +175,10 @@ class Message implements MessageInterface
     }
 
     /**
-     * @param string $direction
+     * @param string|null $direction
      * @return \ServiceSchema\Event\Message
      */
-    public function setDirection(string $direction = null): Message
+    public function setDirection(string $direction = null)
     {
         $this->direction = $direction;
 
@@ -186,18 +186,18 @@ class Message implements MessageInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription(): string
+    public function getDescription()
     {
         return $this->description;
     }
 
     /**
-     * @param string $description
+     * @param string|null $description
      * @return \ServiceSchema\Event\Message
      */
-    public function setDescription(string $description = null): Message
+    public function setDescription(string $description = null)
     {
         $this->description = $description;
 
@@ -205,7 +205,7 @@ class Message implements MessageInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getSource(): string
     {
@@ -213,10 +213,10 @@ class Message implements MessageInterface
     }
 
     /**
-     * @param string $source
+     * @param string|null $source
      * @return \ServiceSchema\Event\Message
      */
-    public function setSource(string $source = null): Message
+    public function setSource(string $source = null)
     {
         $this->source = $source;
 
@@ -235,11 +235,10 @@ class Message implements MessageInterface
      * @param array|\stdClass|null $extra
      * @return \ServiceSchema\Event\Message
      */
-    public function setExtra($extra = null): Message
+    public function setExtra($extra = null)
     {
         $this->extra = $extra;
 
         return $this;
     }
-
 }
