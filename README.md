@@ -4,87 +4,8 @@
 
 Using json schema to validate event messages and process services.
 
-Event is defined by json
-<pre>
-{
-  "event": "Users.afterSaveCommit.Create",
-  "time": "20190726032212",
-  "payload": {
-    "user": {
-      "data": {}
-    },
-    "account": {
-      "data": {
-        "name": "Brighte"
-      }
-    }
-  }
-}
-</pre>
-
-Service has a json schema that use to validate against the Event json
-<pre>
-{
-  "type": "object",
-  "properties": {
-    "event": {
-      "type": "string",
-      "minLength": 0,
-      "maxLength": 256
-    },
-    "time": {
-      "type": "string",
-      "minLength": 0,
-      "maxLength": 256
-    },
-    "payload": {
-      "type": "object",
-      "properties": {
-        "user": {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object"
-            },
-            "class": {
-              "type": "string",
-              "default": "\\App\\Entity\\User"
-            }
-          },
-          "required": [
-            "data"
-          ]
-        },
-        "account": {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "object"
-            },
-            "class": {
-              "type": "string",
-              "default": "\\App\\Entity\\Account"
-            }
-          },
-          "required": [
-            "data"
-          ]
-        }
-      },
-      "required": [
-        "user",
-        "account"
-      ],
-      "additionalProperties": false
-    }
-  },
-  "required": [
-    "event",
-    "payload"
-  ],
-  "additionalProperties": true
-}
-</pre>
++ Event is defined by json
++ Service has a json schema that use to validate against the Event json
  
 ## Configuration
 <pre>

@@ -27,6 +27,12 @@ interface MessageInterface
     public function getEvent();
 
     /**
+     * @param string $event
+     * @return \ServiceSchema\Event\Message
+     */
+    public function setEvent(string $event = null);
+
+    /**
      * @return string
      */
     public function getTime();
@@ -36,12 +42,6 @@ interface MessageInterface
      * @return \ServiceSchema\Event\Message
      */
     public function setTime(string $time = null);
-
-    /**
-     * @param string $event
-     * @return \ServiceSchema\Event\Message
-     */
-    public function setEvent(string $event = null);
 
     /**
      * @return array|null|\stdClass
@@ -68,17 +68,45 @@ interface MessageInterface
     /**
      * @return string
      */
-    public function getQueue();
+    public function getDirection(): string;
+
+    /**
+     * @param string $direction
+     * @return \ServiceSchema\Event\Message
+     */
+    public function setDirection(string $direction = null): Message;
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string;
+
+    /**
+     * @param string $description
+     * @return \ServiceSchema\Event\Message
+     */
+    public function setDescription(string $description = null): Message;
+
+    /**
+     * @return string
+     */
+    public function getSource(): string;
+
+    /**
+     * @param string $source
+     * @return \ServiceSchema\Event\Message
+     */
+    public function setSource(string $source = null): Message;
+
+    /**
+     * @return string
+     */
+    public function getExtra();
 
     /**
      * @param string $queue
      * @return \ServiceSchema\Event\Message
      */
-    public function setQueue(string $queue = null);
+    public function setExtra(string $queue = null);
 
-    /**
-     * @param string $jwt
-     * @return \ServiceSchema\Event\Message
-     */
-    public function setJwt(string $jwt = null);
 }

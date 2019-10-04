@@ -16,40 +16,40 @@ class Message implements MessageInterface
     /** @var string */
     protected $time;
 
-    /** @var string */
-    protected $queue;
-
-    /** @var string */
-    protected $jwt;
-
     /** @var array|null|\stdClass */
     protected $payload;
 
     /** @var string */
     protected $status;
 
-    const STATUS_NEW = "new";
-    const STATUS_FAILED = "failed";
-    const STATUS_SUCCEEDED = "succeeded";
+    /** @var string */
+    protected $direction;
+
+    /** @var string */
+    protected $source;
+
+    /** @var string */
+    protected $description;
+
+    /** @var array */
+    protected $extra;
 
     /**
-     * Event constructor.
+     * Message constructor.
      *
-     * @param string|null $event
-     * @param string|null $time
-     * @param string|null $queue
-     * @param string|null $jwt
-     * @param array|null|\stdClass $payload
-     * @param string|null $status
+     * @param array|null $data
      */
-    public function __construct(string $event = null, string $time = null, $payload = null, string $status = self::STATUS_NEW, string $queue = null, string $jwt = null)
+    public function __construct(array $data = null)
     {
-        $this->event = $event;
-        $this->time = $time ? $time : date("Y-m-d H:i;s");
-        $this->payload = $payload;
-        $this->status = $status;
-        $this->queue = $queue;
-        $this->jwt = $jwt;
+        $this->id = isset($data['id']) ? $data['id'] : null;
+        $this->event = isset($data['event']) ? $data['event'] : null;
+        $this->time = isset($data['time']) ? $data['time'] : date("Y-m-d H:i:s");
+        $this->payload = isset($data['payload']) ? $data['payload'] : null;
+        $this->status = isset($data['status']) ? $data['status'] : null;
+        $this->direction = isset($data['direction']) ? $data['direction'] : null;
+        $this->description = isset($data['description']) ? $data['description'] : null;
+        $this->source = isset($data['source']) ? $data['source'] : null;
+        $this->extra = isset($data['extra']) ? $data['extra'] : null;
     }
 
     /**
@@ -64,8 +64,10 @@ class Message implements MessageInterface
             "time" => $this->time,
             "payload" => $this->payload,
             "status" => $this->status,
-            "queue" => $this->queue,
-            "jwt" => $this->jwt
+            "direction" => $this->direction,
+            "description" => $this->description,
+            "source" => $this->source,
+            "extra" => $this->extra
         ]);
     }
 
@@ -100,7 +102,7 @@ class Message implements MessageInterface
      * @param string $event
      * @return \ServiceSchema\Event\Message
      */
-    public function setEvent(string $event = null)
+    public function setEvent(string $event = null): Message
     {
         $this->event = $event;
 
@@ -110,7 +112,7 @@ class Message implements MessageInterface
     /**
      * @return string
      */
-    public function getTime()
+    public function getTime(): string
     {
         return $this->time;
     }
@@ -119,7 +121,7 @@ class Message implements MessageInterface
      * @param string $time
      * @return \ServiceSchema\Event\Message
      */
-    public function setTime(string $time = null)
+    public function setTime(string $time = null): Message
     {
         $this->time = $time;
 
@@ -127,45 +129,7 @@ class Message implements MessageInterface
     }
 
     /**
-     * @return string
-     */
-    public function getQueue()
-    {
-        return $this->queue;
-    }
-
-    /**
-     * @param string $queue
-     * @return \ServiceSchema\Event\Message
-     */
-    public function setQueue(string $queue = null)
-    {
-        $this->queue = $queue;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getJwt()
-    {
-        return $this->jwt;
-    }
-
-    /**
-     * @param string $jwt
-     * @return \ServiceSchema\Event\Message
-     */
-    public function setJwt(string $jwt = null)
-    {
-        $this->jwt = $jwt;
-
-        return $this;
-    }
-
-    /**
-     * @return array|null|\stdClass
+     * @return array|\stdClass|null
      */
     public function getPayload()
     {
@@ -173,7 +137,7 @@ class Message implements MessageInterface
     }
 
     /**
-     * @param array|\stdClass $payload
+     * @param array|\stdClass|null $payload
      * @return \ServiceSchema\Event\Message
      */
     public function setPayload($payload = null)
@@ -186,7 +150,7 @@ class Message implements MessageInterface
     /**
      * @return string
      */
-    public function getStatus()
+    public function getStatus(): string
     {
         return $this->status;
     }
@@ -195,9 +159,85 @@ class Message implements MessageInterface
      * @param string $status
      * @return \ServiceSchema\Event\Message
      */
-    public function setStatus(string $status = null)
+    public function setStatus(string $status = null): Message
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDirection(): string
+    {
+        return $this->direction;
+    }
+
+    /**
+     * @param string $direction
+     * @return \ServiceSchema\Event\Message
+     */
+    public function setDirection(string $direction = null): Message
+    {
+        $this->direction = $direction;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return \ServiceSchema\Event\Message
+     */
+    public function setDescription(string $description = null): Message
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSource(): string
+    {
+        return $this->source;
+    }
+
+    /**
+     * @param string $source
+     * @return \ServiceSchema\Event\Message
+     */
+    public function setSource(string $source = null): Message
+    {
+        $this->source = $source;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getExtra(): string
+    {
+        return $this->extra;
+    }
+
+    /**
+     * @param string $extra
+     * @return \ServiceSchema\Event\Message
+     */
+    public function setExtra(string $extra = null): Message
+    {
+        $this->extra = $extra;
 
         return $this;
     }

@@ -25,14 +25,17 @@ class MessageFactory
             throw new JsonException(JsonException::INVALID_JSON_CONTENT . $json);
         }
 
-        return new Message(
-            isset($object->event) ? $object->event : null,
-            isset($object->time) ? $object->time : null,
-            isset($object->payload) ? $object->payload : null,
-            isset($object->status) ? $object->status : Message::STATUS_NEW,
-            isset($object->queue) ? $object->queue : null,
-            isset($object->jwt) ? $object->jwt : null
-        );
+        return new Message([
+            'id' => isset($object->id) ? $object->id : null,
+            'event' => isset($object->event) ? $object->event : null,
+            'time' => isset($object->time) ? $object->time : null,
+            'payload' => isset($object->payload) ? $object->payload : null,
+            'status' => isset($object->status) ? $object->status : null,
+            'direction' => isset($object->direction) ? $object->direction : null,
+            'source' => isset($object->source) ? $object->source : null,
+            'description' => isset($object->description) ? $object->description : null,
+            'extra' => isset($object->extra) ? (array) $object->extra : null
+        ]);
     }
 
     /**
