@@ -34,7 +34,7 @@ class MessageFactory
             'direction' => isset($object->direction) ? $object->direction : null,
             'source' => isset($object->source) ? $object->source : null,
             'description' => isset($object->description) ? $object->description : null,
-            'extra' => isset($object->extra) ? (array) $object->extra : null
+            'extra' => isset($object->extra) ? $object->extra : null
         ]);
     }
 

@@ -31,7 +31,7 @@ class Message implements MessageInterface
     /** @var string */
     protected $description;
 
-    /** @var array */
+    /** @var array|null|\stdClass */
     protected $extra;
 
     /**
@@ -224,21 +224,22 @@ class Message implements MessageInterface
     }
 
     /**
-     * @return string
+     * @return array|\stdClass|null
      */
-    public function getExtra(): string
+    public function getExtra()
     {
         return $this->extra;
     }
 
     /**
-     * @param string $extra
+     * @param array|\stdClass|null $extra
      * @return \ServiceSchema\Event\Message
      */
-    public function setExtra(string $extra = null): Message
+    public function setExtra($extra = null): Message
     {
         $this->extra = $extra;
 
         return $this;
     }
+
 }

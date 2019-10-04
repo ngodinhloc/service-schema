@@ -104,9 +104,9 @@ interface MessageInterface
     public function getExtra();
 
     /**
-     * @param string $queue
+     * @param array|\stdClass|null $extra
      * @return \ServiceSchema\Event\Message
      */
-    public function setExtra(string $queue = null);
+    public function setExtra($extra = null): Message;
 
 }
