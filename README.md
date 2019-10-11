@@ -1,6 +1,21 @@
 # Service Schema
-[![Build Status](https://travis-ci.com/brighte-capital/service-schema.svg?branch=master)](https://travis-ci.com/brighte-capital/service-schema)
-[![codecov](https://codecov.io/gh/brighte-capital/service-schema/branch/master/graph/badge.svg)](https://codecov.io/gh/brighte-capital/service-schema)
+[![Software license][ico-license]](LICENSE)
+[![Version][ico-version-stable]][link-packagist]
+[![Download][ico-downloads-monthly]][link-downloads]
+[![Build status][ico-travis]][link-travis]
+[![Coverage][ico-codecov]][link-codecov]
+
+
+[ico-license]: https://img.shields.io/github/license/nrk/predis.svg?style=flat-square
+[ico-version-stable]: https://img.shields.io/packagist/v/brightecapital/service-schema.svg
+[ico-downloads-monthly]: https://img.shields.io/packagist/dm/brightecapital/service-schema.svg
+[ico-travis]: https://travis-ci.com/brighte-capital/service-schema.svg?branch=master
+[ico-codecov]: https://codecov.io/gh/brighte-capital/service-schema/branch/master/graph/badge.svg
+
+[link-packagist]: https://packagist.org/packages/brightecapital/service-schema
+[link-codecov]: https://codecov.io/gh/brighte-capital/service-schema
+[link-travis]: https://travis-ci.com/brighte-capital/service-schema
+[link-downloads]: https://packagist.org/packages/brightecapital/service-schema/stats
 
 Using json schema to validate event messages and process services.
 
