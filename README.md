@@ -17,10 +17,12 @@
 [link-travis]: https://travis-ci.com/brighte-capital/service-schema
 [link-downloads]: https://packagist.org/packages/brightecapital/service-schema/stats
 
-Using json schema to validate event messages and process services.
+Based on the concept of "event schema first", we improve things a step further by introducing service-schema which defines a schema for each service so it will give us the flexibilty to reuse same service and schema in different event.
 
-+ Event is defined by json
-+ Service has a json schema that use to validate against the Event json
++ Each event might has one or many services that are listening to it
++ Each service has one schema which will be used to validate the input json
+
+Events and services are configurable.
  
 ## Configuration
 <pre>
@@ -51,7 +53,7 @@ events.json
 
 In this events.json:
 - There are 02 events that the microservice is listening to: "Users.afterSaveCommit.Create", "Users.afterSaveCommit.Update"
-- Each of event have a list of services that will run the event
+- Each of event have a list of services that listen to the event
 
 services.json
 <pre>
