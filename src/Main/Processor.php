@@ -150,7 +150,7 @@ class Processor implements ProcessorInterface
      * @throws \ServiceSchema\Json\Exception\JsonException
      * @throws \ServiceSchema\Main\Exception\ProcessorException
      */
-    protected function createMessage($json = null)
+    public function createMessage($json = null)
     {
         if ($json instanceof Message) {
             return $json;
