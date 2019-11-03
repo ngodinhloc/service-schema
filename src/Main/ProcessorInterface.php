@@ -20,6 +20,14 @@ interface ProcessorInterface
     public function process($json = null, array $filteredEvents = null, bool $return = false);
 
     /**
+     * @param string|\ServiceSchema\Event\Message $json
+     * @return bool
+     * @throws \ServiceSchema\Json\Exception\JsonException
+     * @throws \ServiceSchema\Main\Exception\ProcessorException
+     */
+    public function rollback($json = null);
+
+    /**
      * @param \ServiceSchema\Event\MessageInterface|null $message
      * @param \ServiceSchema\Service\ServiceInterface|null $service
      * @param array|null $callbacks

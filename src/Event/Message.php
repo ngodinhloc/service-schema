@@ -20,19 +20,22 @@ class Message implements MessageInterface
     protected $payload;
 
     /** @var string */
-    protected $status;
-
-    /** @var string */
-    protected $direction;
-
-    /** @var string */
     protected $source;
 
     /** @var string */
     protected $description;
 
-    /** @var array|null|\stdClass */
-    protected $extra;
+    /** @var string */
+    protected $status;
+
+    /** @var string */
+    protected $sagaId;
+
+    /** @var int */
+    protected $sagaOrder;
+
+    /** @var array|null */
+    protected $attributes;
 
     /**
      * Message constructor.
@@ -45,11 +48,12 @@ class Message implements MessageInterface
         $this->event = isset($data['event']) ? $data['event'] : null;
         $this->time = isset($data['time']) ? $data['time'] : date("Y-m-d H:i:s");
         $this->payload = isset($data['payload']) ? $data['payload'] : null;
-        $this->status = isset($data['status']) ? $data['status'] : null;
-        $this->direction = isset($data['direction']) ? $data['direction'] : null;
-        $this->description = isset($data['description']) ? $data['description'] : null;
         $this->source = isset($data['source']) ? $data['source'] : null;
-        $this->extra = isset($data['extra']) ? $data['extra'] : null;
+        $this->description = isset($data['description']) ? $data['description'] : null;
+        $this->status = isset($data['status']) ? $data['status'] : null;
+        $this->sagaId = isset($data['sagaId']) ? (int)$data['sagaId'] : null;
+        $this->sagaOrder = isset($data['sagaOrder']) ? $data['sagaOrder'] : null;
+        $this->attributes = isset($data['attributes']) ? (array)$data['attributes'] : null;
     }
 
     /**
@@ -63,11 +67,12 @@ class Message implements MessageInterface
             "event" => $this->event,
             "time" => $this->time,
             "payload" => $this->payload,
-            "status" => $this->status,
-            "direction" => $this->direction,
-            "description" => $this->description,
             "source" => $this->source,
-            "extra" => $this->extra
+            "description" => $this->description,
+            "status" => $this->status,
+            "sagaId" => $this->sagaId,
+            "sagaOrder" => $this->sagaOrder,
+            "attributes" => $this->attributes
         ]);
     }
 
@@ -169,25 +174,6 @@ class Message implements MessageInterface
     /**
      * @return string|null
      */
-    public function getDirection()
-    {
-        return $this->direction;
-    }
-
-    /**
-     * @param string|null $direction
-     * @return \ServiceSchema\Event\Message
-     */
-    public function setDirection(string $direction = null)
-    {
-        $this->direction = $direction;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
     public function getDescription()
     {
         return $this->description;
@@ -224,20 +210,83 @@ class Message implements MessageInterface
     }
 
     /**
-     * @return array|\stdClass|null
+     * @return string
      */
-    public function getExtra()
+    public function getSagaId()
     {
-        return $this->extra;
+        return $this->sagaId;
     }
 
     /**
-     * @param array|\stdClass|null $extra
+     * @param string|null $sagaId
      * @return \ServiceSchema\Event\Message
      */
-    public function setExtra($extra = null)
+    public function setSagaId(string $sagaId = null)
     {
-        $this->extra = $extra;
+        $this->sagaId = $sagaId;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSagaOrder()
+    {
+        return $this->sagaOrder;
+    }
+
+    /**
+     * @param int $sagaOrder
+     * @return \ServiceSchema\Event\Message
+     */
+    public function setSagaOrder(int $sagaOrder = null)
+    {
+        $this->sagaOrder = $sagaOrder;
+
+        return $this;
+    }
+
+    /**
+     * @return array|\stdClass|null
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * @param array|\stdClass|null $attributes
+     * @return \ServiceSchema\Event\Message
+     */
+    public function setAttributes($attributes = null)
+    {
+        $this->attributes = $attributes;
+
+        return $this;
+    }
+
+    /**
+     * @param string $key
+     * @return mixed|null
+     */
+    public function getAttribute(string $key)
+    {
+        if (!isset($this->attributes[$key])) {
+            return null;
+        }
+
+        return $this->attributes[$key];
+    }
+
+    /**
+     * @param string $key
+     * @param string|array|null $value
+     * @return $this
+     */
+    public function setAttribute(string $key, $value = null)
+    {
+        $this->attributes[$key] = $value;
 
         return $this;
     }

@@ -10,6 +10,7 @@ use ServiceSchema\Event\MessageInterface;
 use ServiceSchema\Json\JsonReader;
 use ServiceSchema\Main\Exception\ProcessorException;
 use ServiceSchema\Service\Exception\ServiceException;
+use ServiceSchema\Service\SagaInterface;
 use ServiceSchema\Service\ServiceFactory;
 use ServiceSchema\Service\ServiceInterface;
 use ServiceSchema\Service\ServiceValidator;
@@ -60,7 +61,7 @@ class Processor implements ProcessorInterface
     }
 
     /**
-     * @param string|\ServiceSchema\Event\Message $json
+     * @param string|\ServiceSchema\Event\Message $message
      * @param bool $return return first service result
      * @param array|null $filteredEvents
      * @return bool
@@ -68,19 +69,11 @@ class Processor implements ProcessorInterface
      * @throws \ServiceSchema\Service\Exception\ServiceException
      * @throws \ServiceSchema\Main\Exception\ProcessorException
      */
-    public function process($json = null, array $filteredEvents = null, bool $return = false)
+    public function process($message = null, array $filteredEvents = null, bool $return = false)
     {
-        if (!$json instanceof Message) {
-            $message = $this->messageFactory->createMessage($json);
-            if (empty($message)) {
-                throw new ProcessorException(ProcessorException::FAILED_TO_CREATE_MESSAGE . $json);
-            }
-        } else {
-            $message = $json;
-        }
-
+        $message = $this->createMessage($message);
         if (!empty($filteredEvents) && !in_array($message->getEvent(), $filteredEvents)) {
-            throw new ProcessorException(ProcessorException::FILTERED_EVENT_ONLY . $json);
+            throw new ProcessorException(ProcessorException::FILTERED_EVENT_ONLY . json_encode($filteredEvents));
         }
 
         $registeredEvents = $this->eventRegister->retrieveEvent($message->getEvent());
@@ -115,6 +108,60 @@ class Processor implements ProcessorInterface
         }
 
         return true;
+    }
+
+    /**
+     * @param string|\ServiceSchema\Event\Message $message
+     * @return bool
+     * @throws \ServiceSchema\Json\Exception\JsonException
+     * @throws \ServiceSchema\Main\Exception\ProcessorException
+     */
+    public function rollback($message = null)
+    {
+        $message = $this->createMessage($message);
+        $registeredEvents = $this->eventRegister->retrieveEvent($message->getEvent());
+        if (empty($registeredEvents)) {
+            throw new ProcessorException(ProcessorException::NO_REGISTER_EVENTS . $message->getEvent());
+        }
+
+        foreach ($registeredEvents as $eventName => $services) {
+            if (empty($services)) {
+                continue;
+            }
+
+            foreach ($services as $serviceName) {
+                $registerService = $this->serviceRegister->retrieveService($serviceName);
+                if (empty($registerService)) {
+                    continue;
+                }
+
+                if ($registerService instanceof SagaInterface) {
+                    $registerService->rollback($message);
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param $json
+     * @return false|\ServiceSchema\Event\Message
+     * @throws \ServiceSchema\Json\Exception\JsonException
+     * @throws \ServiceSchema\Main\Exception\ProcessorException
+     */
+    protected function createMessage($json = null)
+    {
+        if ($json instanceof Message) {
+            return $json;
+        }
+
+        $message = $this->messageFactory->createMessage($json);
+        if (empty($message)) {
+            throw new ProcessorException(ProcessorException::FAILED_TO_CREATE_MESSAGE . $json);
+        }
+
+        return $message;
     }
 
     /**

@@ -17,7 +17,7 @@ interface MessageInterface
 
     /**
      * @param string|null $id
-     * @return \ServiceSchema\Event\Message
+     * @return \ServiceSchema\Event\MessageInterface
      */
     public function setId(string $id = null);
 
@@ -28,7 +28,7 @@ interface MessageInterface
 
     /**
      * @param string|null $event
-     * @return \ServiceSchema\Event\Message
+     * @return \ServiceSchema\Event\MessageInterface
      */
     public function setEvent(string $event = null);
 
@@ -39,7 +39,7 @@ interface MessageInterface
 
     /**
      * @param string|null $time
-     * @return \ServiceSchema\Event\Message
+     * @return \ServiceSchema\Event\MessageInterface
      */
     public function setTime(string $time = null);
 
@@ -50,7 +50,7 @@ interface MessageInterface
 
     /**
      * @param array|\stdClass|null $payload
-     * @return \ServiceSchema\Event\Message
+     * @return \ServiceSchema\Event\MessageInterface
      */
     public function setPayload($payload = null);
 
@@ -61,20 +61,9 @@ interface MessageInterface
 
     /**
      * @param string|null $status
-     * @return \ServiceSchema\Event\Message
+     * @return \ServiceSchema\Event\MessageInterface
      */
     public function setStatus(string $status = null);
-
-    /**
-     * @return string|null
-     */
-    public function getDirection();
-
-    /**
-     * @param string|null $direction
-     * @return \ServiceSchema\Event\Message
-     */
-    public function setDirection(string $direction = null);
 
     /**
      * @return string|null
@@ -83,7 +72,7 @@ interface MessageInterface
 
     /**
      * @param string|null $description
-     * @return \ServiceSchema\Event\Message
+     * @return \ServiceSchema\Event\MessageInterface
      */
     public function setDescription(string $description = null);
 
@@ -94,19 +83,53 @@ interface MessageInterface
 
     /**
      * @param string|null $source
-     * @return \ServiceSchema\Event\Message
+     * @return \ServiceSchema\Event\MessageInterface
      */
     public function setSource(string $source = null);
 
     /**
+     * @return string
+     */
+    public function getSagaId();
+
+    /**
+     * @param string|null $sagaId
+     * @return \ServiceSchema\Event\MessageInterface
+     */
+    public function setSagaId(string $sagaId = null);
+
+    /**
+     * @return int
+     */
+    public function getSagaOrder();
+
+    /**
+     * @param int $sagaOrder
+     * @return \ServiceSchema\Event\MessageInterface
+     */
+    public function setSagaOrder(int $sagaOrder = null);
+
+    /**
      * @return array|\stdClass|null
      */
-    public function getExtra();
+    public function getAttributes();
 
     /**
      * @param array|\stdClass|null $extra
-     * @return \ServiceSchema\Event\Message
+     * @return \ServiceSchema\Event\MessageInterface
      */
-    public function setExtra($extra = null);
+    public function setAttributes($extra = null);
 
+    /**
+     * @param string $key
+     * @return mixed|null
+     */
+    public function getAttribute(string $key);
+
+    /**
+     * @param string $key
+     * @param string|array|null $value
+     * @return \ServiceSchema\Event\MessageInterface
+     */
+    public function setAttribute(string $key, $value = null);
 }

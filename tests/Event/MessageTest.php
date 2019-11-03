@@ -7,6 +7,7 @@ use ServiceSchema\Event\Message;
 
 class MessageTest extends TestCase
 {
+
     protected $testDir;
 
     public function setUp()
@@ -27,11 +28,11 @@ class MessageTest extends TestCase
         $event = new Message();
         $event->setEvent("Test.Event.Name");
         $event->setTime("SomeTimeString");
-        $event->setPayload((object)["name" => "Ken"]);
+        $event->setPayload((object) ["name" => "Ken"]);
         $event->setStatus("new");
         $json = $event->toJson();
         $this->assertTrue(is_string($json));
-        $this->assertEquals('{"id":null,"event":"Test.Event.Name","time":"SomeTimeString","payload":{"name":"Ken"},"status":"new","direction":null,"description":null,"source":null,"extra":null}', $json);
+        $this->assertEquals('{"id":null,"event":"Test.Event.Name","time":"SomeTimeString","payload":{"name":"Ken"},"source":null,"description":null,"status":"new","sagaId":null,"sagaOrder":null,"attributes":null}', $json);
 
         $event = new Message();
         $event->setEvent("Users.afterSaveCommit.Create");
@@ -39,6 +40,6 @@ class MessageTest extends TestCase
         $event->setPayload(["user" => ["data" => ["name" => "Ken"]], "account" => ["data" => ["name" => "Brighte"]]]);
         $json = $event->toJson();
         $this->assertTrue(is_string($json));
-        $this->assertEquals('{"id":null,"event":"Users.afterSaveCommit.Create","time":"20190730123000","payload":{"user":{"data":{"name":"Ken"}},"account":{"data":{"name":"Brighte"}}},"status":null,"direction":null,"description":null,"source":null,"extra":null}', $json);
+        $this->assertEquals('{"id":null,"event":"Users.afterSaveCommit.Create","time":"20190730123000","payload":{"user":{"data":{"name":"Ken"}},"account":{"data":{"name":"Brighte"}}},"source":null,"description":null,"status":null,"sagaId":null,"sagaOrder":null,"attributes":null}', $json);
     }
 }

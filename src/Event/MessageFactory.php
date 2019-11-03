@@ -30,11 +30,12 @@ class MessageFactory
             'event' => isset($object->event) ? $object->event : null,
             'time' => isset($object->time) ? $object->time : null,
             'payload' => isset($object->payload) ? $object->payload : null,
-            'status' => isset($object->status) ? $object->status : null,
-            'direction' => isset($object->direction) ? $object->direction : null,
             'source' => isset($object->source) ? $object->source : null,
             'description' => isset($object->description) ? $object->description : null,
-            'extra' => isset($object->extra) ? $object->extra : null
+            'status' => isset($object->status) ? $object->status : null,
+            'sagaId' => isset($object->sagaId) ? (int) $object->sagaId : null,
+            'sagaOrder' => isset($object->sagaOrder) ? $object->sagaOrder : null,
+            'attributes' => isset($object->attributes) ? (array) $object->attributes : null
         ]);
     }
 
