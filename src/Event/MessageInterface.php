@@ -99,17 +99,6 @@ interface MessageInterface
     public function setSagaId(string $sagaId = null);
 
     /**
-     * @return int
-     */
-    public function getSagaOrder();
-
-    /**
-     * @param int $sagaOrder
-     * @return \ServiceSchema\Event\MessageInterface
-     */
-    public function setSagaOrder(int $sagaOrder = null);
-
-    /**
      * @return array|\stdClass|null
      */
     public function getAttributes();

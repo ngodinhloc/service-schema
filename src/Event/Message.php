@@ -31,9 +31,6 @@ class Message implements MessageInterface
     /** @var string */
     protected $sagaId;
 
-    /** @var int */
-    protected $sagaOrder;
-
     /** @var array|null */
     protected $attributes;
 
@@ -52,7 +49,6 @@ class Message implements MessageInterface
         $this->description = isset($data['description']) ? $data['description'] : null;
         $this->status = isset($data['status']) ? $data['status'] : null;
         $this->sagaId = isset($data['sagaId']) ? (int)$data['sagaId'] : null;
-        $this->sagaOrder = isset($data['sagaOrder']) ? $data['sagaOrder'] : null;
         $this->attributes = isset($data['attributes']) ? (array)$data['attributes'] : null;
     }
 
@@ -71,7 +67,6 @@ class Message implements MessageInterface
             "description" => $this->description,
             "status" => $this->status,
             "sagaId" => $this->sagaId,
-            "sagaOrder" => $this->sagaOrder,
             "attributes" => $this->attributes
         ]);
     }
@@ -224,25 +219,6 @@ class Message implements MessageInterface
     public function setSagaId(string $sagaId = null)
     {
         $this->sagaId = $sagaId;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSagaOrder()
-    {
-        return $this->sagaOrder;
-    }
-
-    /**
-     * @param int $sagaOrder
-     * @return \ServiceSchema\Event\Message
-     */
-    public function setSagaOrder(int $sagaOrder = null)
-    {
-        $this->sagaOrder = $sagaOrder;
 
         return $this;
     }

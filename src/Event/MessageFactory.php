@@ -34,7 +34,6 @@ class MessageFactory
             'description' => isset($object->description) ? $object->description : null,
             'status' => isset($object->status) ? $object->status : null,
             'sagaId' => isset($object->sagaId) ? (int) $object->sagaId : null,
-            'sagaOrder' => isset($object->sagaOrder) ? $object->sagaOrder : null,
             'attributes' => isset($object->attributes) ? (array) $object->attributes : null
         ]);
     }
