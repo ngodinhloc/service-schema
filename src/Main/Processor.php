@@ -111,10 +111,11 @@ class Processor implements ProcessorInterface
     }
 
     /**
-     * @param string|\ServiceSchema\Event\Message $message
+     * @param null $message
      * @return bool
      * @throws \ServiceSchema\Json\Exception\JsonException
      * @throws \ServiceSchema\Main\Exception\ProcessorException
+     * @throws \ServiceSchema\Service\Exception\ServiceException
      */
     public function rollback($message = null)
     {
@@ -135,8 +136,14 @@ class Processor implements ProcessorInterface
                     continue;
                 }
 
-                if ($registerService instanceof SagaInterface) {
-                    $registerService->rollback($message);
+                $jsonSchema = $registerService[$serviceName][ServiceRegister::INDEX_SCHEMA];
+                $service = $this->serviceFactory->createService($serviceName, $jsonSchema);
+                if (empty($service)) {
+                    continue;
+                }
+
+                if ($service instanceof SagaInterface) {
+                    $service->rollback($message);
                 }
             }
         }
