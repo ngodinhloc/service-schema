@@ -48,7 +48,7 @@ class Message implements MessageInterface
         $this->source = isset($data['source']) ? $data['source'] : null;
         $this->description = isset($data['description']) ? $data['description'] : null;
         $this->status = isset($data['status']) ? $data['status'] : null;
-        $this->sagaId = isset($data['sagaId']) ? (int)$data['sagaId'] : null;
+        $this->sagaId = isset($data['sagaId']) ? $data['sagaId'] : null;
         $this->attributes = isset($data['attributes']) ? (array)$data['attributes'] : null;
     }
 
