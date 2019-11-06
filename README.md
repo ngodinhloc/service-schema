@@ -22,6 +22,7 @@ Based on the concept of "event schema first", service-schema improves things a s
 in order to reuse services and schemas in different events through configuration:
 
 + Each event might has one or many services that are listening to it
++ Each service has one schema which will be used to validate the input json
 
 ## Configuration
 <pre>
