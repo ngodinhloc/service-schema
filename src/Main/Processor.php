@@ -173,12 +173,12 @@ class Processor implements ProcessorInterface
 
     /**
      * @param \ServiceSchema\Event\MessageInterface|null $message
-     * @param \ServiceSchema\Service\ServiceInterface|null $service
+     * @param \ServiceSchema\Service\SagaInterface|null $service
      * @return bool|\ServiceSchema\Event\MessageInterface
      * @throws \ServiceSchema\Json\Exception\JsonException
      * @throws \ServiceSchema\Service\Exception\ServiceException
      */
-    public function rollbackService(MessageInterface $message = null, ServiceInterface $service = null)
+    public function rollbackService(MessageInterface $message = null, SagaInterface $service = null)
     {
         $json = JsonReader::decode($message->toJson());
         $validator = $this->serviceValidator->validate($json, $service);
@@ -190,11 +190,7 @@ class Processor implements ProcessorInterface
             $message->setPayload($json->payload);
         }
 
-        if ($service instanceof SagaInterface) {
-            return $service->rollback($message);
-        }
-
-        return false;
+        return $service->rollback($message);
     }
 
     /**
