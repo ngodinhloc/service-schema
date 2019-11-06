@@ -17,14 +17,11 @@
 [link-travis]: https://travis-ci.com/brighte-capital/service-schema
 [link-downloads]: https://packagist.org/packages/brightecapital/service-schema/stats
 
-Service-schema was created as a tool to process messages from broker or between microservices.
+Service-schema was created as a tool to process messages from broker or between microservices, implementing event sourcing and Saga pattern.
 Based on the concept of "event schema first", service-schema improves things a step further by introducing  schema for each service 
 in order to reuse services and schemas in different events through configuration:
 
 + Each event might has one or many services that are listening to it
-+ Each service has one schema which will be used to validate the input json
-
-Service-schema also implements event sourcing and Saga pattern.
 
 ## Configuration
 <pre>
