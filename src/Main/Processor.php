@@ -143,7 +143,7 @@ class Processor implements ProcessorInterface
                 }
 
                 if ($service instanceof SagaInterface) {
-                    $service->rollback($message);
+                    $this->rollbackService($message, $service);
                 }
             }
         }
@@ -169,6 +169,32 @@ class Processor implements ProcessorInterface
         }
 
         return $message;
+    }
+
+    /**
+     * @param \ServiceSchema\Event\MessageInterface|null $message
+     * @param \ServiceSchema\Service\ServiceInterface|null $service
+     * @return bool|\ServiceSchema\Event\MessageInterface
+     * @throws \ServiceSchema\Json\Exception\JsonException
+     * @throws \ServiceSchema\Service\Exception\ServiceException
+     */
+    public function rollbackService(MessageInterface $message = null, ServiceInterface $service = null)
+    {
+        $json = JsonReader::decode($message->toJson());
+        $validator = $this->serviceValidator->validate($json, $service);
+        if (!$validator->isValid()) {
+            throw  new ServiceException(ServiceException::INVALIDATED_JSON_STRING . json_encode($validator->getErrors()));
+        }
+
+        if (isset($json->payload)) {
+            $message->setPayload($json->payload);
+        }
+
+        if ($service instanceof SagaInterface) {
+            return $service->rollback($message);
+        }
+
+        return false;
     }
 
     /**
