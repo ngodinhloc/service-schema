@@ -17,7 +17,7 @@
 [link-travis]: https://travis-ci.com/brighte-capital/service-schema
 [link-downloads]: https://packagist.org/packages/brightecapital/service-schema/stats
 
-The service-schema was created as a tool to process messages exchanging between microservices. 
+Service-schema was created as a tool to process messages exchanging between microservices. 
 Based on the concept of "event schema first", service-schema improves things a step further by introducing  schema for each service 
 in order to reuse services and schemas in different events through configuration:
 
