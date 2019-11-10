@@ -92,4 +92,18 @@ class JsonReaderTest extends TestCase
         $json = JsonReader::encode($array);
         $this->assertTrue(is_string($json));
     }
+
+    /**
+     * @covers \ServiceSchema\Json\JsonReader::save
+     * @throws \ServiceSchema\Json\Exception\JsonException
+     */
+    public function testSave()
+    {
+        $file = $this->testDir . "/jsons/JsonReader/testSave.json";
+        $array = ["name" => "Ken"];
+        $json = JsonReader::encode($array);
+        JsonReader::save($file, $json);
+        $contents = file_get_contents($file);
+        $this->assertSame('{"name":"Ken"}', $contents);
+    }
 }
