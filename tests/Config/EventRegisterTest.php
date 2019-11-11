@@ -62,4 +62,25 @@ class EventRegisterTest extends TestCase
         $this->assertTrue(isset($event["Event.Name"]));
         $this->assertEquals(["SomeServiceClass"], $event["Event.Name"]);
     }
+
+    /**
+     * @covers \ServiceSchema\Config\EventRegister::getConfigs
+     * @covers \ServiceSchema\Config\EventRegister::setConfigs
+     * @covers \ServiceSchema\Config\EventRegister::getEvents
+     * @covers \ServiceSchema\Config\EventRegister::setEvents
+     * @throws \ServiceSchema\Json\Exception\JsonException
+     */
+    public function testGetterAndSetters()
+    {
+        $this->eventRegister->loadEvents();
+        $this->eventRegister->registerEvent("Event.Name", ["SomeServiceClass"]);
+
+        $entity = $this->eventRegister->getConfigs();
+        $this->eventRegister->setConfigs($entity);
+        $this->assertSame($entity, $this->eventRegister->getConfigs());
+
+        $entity = $this->eventRegister->getEvents();
+        $this->eventRegister->setEvents($entity);
+        $this->assertSame($entity, $this->eventRegister->getEvents());
+    }
 }
