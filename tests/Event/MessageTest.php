@@ -24,6 +24,16 @@ class MessageTest extends TestCase
      * @covers \ServiceSchema\Event\Message::getId
      * @covers \ServiceSchema\Event\Message::setStatus
      * @covers \ServiceSchema\Event\Message::getStatus
+     * @covers \ServiceSchema\Event\Message::setDescription
+     * @covers \ServiceSchema\Event\Message::getDescription
+     * @covers \ServiceSchema\Event\Message::setSource
+     * @covers \ServiceSchema\Event\Message::getSource
+     * @covers \ServiceSchema\Event\Message::setSagaId
+     * @covers \ServiceSchema\Event\Message::getSagaId
+     * @covers \ServiceSchema\Event\Message::setAttribute
+     * @covers \ServiceSchema\Event\Message::getAttribute
+     * @covers \ServiceSchema\Event\Message::setAttributes
+     * @covers \ServiceSchema\Event\Message::getAttributes
      * @covers \ServiceSchema\Event\Message::toJson
      * @throws \ServiceSchema\Json\Exception\JsonException
      */
@@ -53,12 +63,28 @@ class MessageTest extends TestCase
         $this->assertSame($id, '111');
 
         $event->setStatus('status');
-        $status = $event->getStatus();
-        $this->assertSame($status, 'status');
+        $entity = $event->getStatus();
+        $this->assertSame($entity, 'status');
 
         $event->setDescription('description');
-        $status = $event->getDescription();
-        $this->assertSame($status, 'description');
+        $entity = $event->getDescription();
+        $this->assertSame($entity, 'description');
+
+        $event->setSource('source');
+        $entity = $event->getSource();
+        $this->assertSame($entity, 'source');
+
+        $event->setSagaId('sagaId');
+        $entity = $event->getSagaId();
+        $this->assertSame($entity, 'sagaId');
+
+        $event->setAttribute('attr', 'val');
+        $entity = $event->getAttribute('attr');
+        $this->assertSame($entity, 'val');
+
+        $event->setAttributes(['attr', 'attr2']);
+        $entity = $event->getAttributes();
+        $this->assertSame($entity, ['attr', 'attr2']);
 
     }
 }

@@ -22,6 +22,10 @@ class ServiceValidatorTest extends TestCase
 
     /**
      * @covers \ServiceSchema\Service\ServiceValidator::validate
+     * @covers \ServiceSchema\Service\ServiceValidator::getValidator
+     * @covers \ServiceSchema\Service\ServiceValidator::setValidator
+     * @covers \ServiceSchema\Service\ServiceValidator::getSchemaDir
+     * @covers \ServiceSchema\Service\ServiceValidator::setSchemaDir
      * @throws \ServiceSchema\Json\Exception\JsonException
      * @throws \ServiceSchema\Service\Exception\ServiceException
      */
@@ -33,5 +37,13 @@ class ServiceValidatorTest extends TestCase
         $service->setJsonSchema($this->testDir . "/jsons/schemas/CreateContact.json");
         $validator = $this->serviceValidator->validate($jsonObject, $service);
         $this->assertTrue($validator->isValid());
+
+        $validator = $this->serviceValidator->getValidator();
+        $this->serviceValidator->setValidator($validator);
+        $this->assertSame($validator, $this->serviceValidator->getValidator());
+
+        $this->serviceValidator->setSchemaDir($this->testDir);
+        $schemaDir = $this->serviceValidator->getSchemaDir();
+        $this->assertSame($schemaDir, $this->serviceValidator->getSchemaDir());
     }
 }
