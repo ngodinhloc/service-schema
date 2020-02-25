@@ -205,6 +205,9 @@ $result = $processor->process($message);
  */
 </pre>
 
+### UUID
+Using Ramsey/Uuid to generate event id
+
 ### Tests
 Please refer to tests for sample configs of events, services, schemas and usage of Processor
 - tests/jsons/configs/events.json: configuration of events
