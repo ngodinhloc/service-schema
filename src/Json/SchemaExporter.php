@@ -53,4 +53,20 @@ class SchemaExporter
                 break;
         }
     }
+
+    /**
+     * @param string $dir
+     * @return array|false|string
+     * @throws \ServiceSchema\Json\Exception\JsonException
+     */
+    public static function exportEventSchema(string $dir)
+    {
+        $files = array_diff(scandir($dir), array('.', '..'));
+        $schemas = [];
+        foreach ($files as $file) {
+            $schemas[basename($file, '.' . self::SCHEMA_EXTENSION)] = JsonReader::decode(JsonReader::read($dir . '/' . $file), true);
+        }
+
+        return $schemas;
+    }
 }
